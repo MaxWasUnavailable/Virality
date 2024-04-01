@@ -14,7 +14,7 @@ internal static class InviteFriendsTerminalPatches
     /// </summary>
     /// <param name="__result"> The original result of the method. </param>
     [HarmonyPrefix]
-    [HarmonyPatch(nameof(InviteFriendsTerminal.IsGameFull), "get")]
+    [HarmonyPatch(nameof(InviteFriendsTerminal.IsGameFull), MethodType.Getter)]
     private static bool IsGameFullPrefix(ref bool __result)
     {
         __result = PlayerHandler.instance.players.Count > Virality.MaxPlayers!.Value;
