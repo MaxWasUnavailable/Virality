@@ -1,4 +1,5 @@
 ﻿using BepInEx;
+using BepInEx.Configuration;
 using BepInEx.Logging;
 using HarmonyLib;
 
@@ -13,6 +14,7 @@ public class Virality : BaseUnityPlugin
     private bool _isPatched;
     private Harmony? Harmony { get; set; }
     internal new static ManualLogSource? Logger { get; private set; }
+    internal static ConfigEntry<int>? MaxPlayers { get; private set; }
 
     /// <summary>
     ///     Singleton instance of the plugin.
@@ -26,6 +28,10 @@ public class Virality : BaseUnityPlugin
 
         // Init logger
         Logger = base.Logger;
+
+        // Init config entries
+        MaxPlayers = Config.Bind("General", "MaxPlayers", 10,
+            "The maximum number of players allowed in your lobby.");
 
         // Patch using Harmony
         PatchAll();
