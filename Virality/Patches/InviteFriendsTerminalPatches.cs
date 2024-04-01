@@ -5,7 +5,6 @@ namespace Virality.Patches;
 
 [HarmonyPatch(typeof(InviteFriendsTerminal))]
 [HarmonyPriority(Priority.First)]
-[HarmonyWrapSafe]
 internal static class InviteFriendsTerminalPatches
 {
     /// <summary>
