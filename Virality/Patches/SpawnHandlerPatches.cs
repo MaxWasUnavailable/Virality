@@ -8,9 +8,8 @@ internal static class SpawnHandlerPatches
 {
     [HarmonyPrefix]
     [HarmonyPatch(nameof(SpawnHandler.GetSpawnPoint))]
-    private static void FindLocalSpawnIndexPostfix(ref SpawnHandler __instance, Spawns state)
+    private static void GetSpawnPointPrefix(ref SpawnHandler __instance, Spawns state)
     {
-        __instance.FindLocalSpawnIndex();
         switch (state)
         {
             case Spawns.House:
