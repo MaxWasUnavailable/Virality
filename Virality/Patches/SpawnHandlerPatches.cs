@@ -1,3 +1,4 @@
+using System;
 using HarmonyLib;
 
 namespace Virality.Patches;
@@ -6,24 +7,12 @@ namespace Virality.Patches;
 [HarmonyPriority(Priority.First)]
 internal static class SpawnHandlerPatches
 {
-    [HarmonyPrefix]
-    [HarmonyPatch(nameof(SpawnHandler.GetSpawnPoint))]
-    private static void GetSpawnPointPrefix(ref SpawnHandler __instance, Spawns state)
+    [HarmonyPostfix]
+    [HarmonyPatch(nameof(SpawnHandler.FindLocalSpawnIndex))]
+    private static void FindLocalSpawnIndexPostfix(ref SpawnHandler __instance)
     {
-        switch (state)
-        {
-            case Spawns.House:
-                __instance.m_LocalSpawnIndex %= __instance.m_HouseSpawns.Length;
-                break;
-            case Spawns.Hospital:
-                __instance.m_LocalSpawnIndex %= __instance.m_HospitalSpawns.Length;
-                break;
-            case Spawns.DiveBell:
-                __instance.m_LocalSpawnIndex %= __instance.m_DiveBellSpawns.Length;
-                break;
-            default:
-                break;
-                
-        }
+        var minNumberOfSpawns = Math.Min(
+            Math.Min(__instance.m_HospitalSpawns.Length, __instance.m_HouseSpawns.Length), __instance.m_DiveBellSpawns.Length);
+        __instance.m_LocalSpawnIndex %= minNumberOfSpawns;
     }
 }
