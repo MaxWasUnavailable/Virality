@@ -1,22 +1,94 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net35</TargetFramework>
-        <AssemblyName>Virality</AssemblyName>
-        <Description>My first plugin</Description>
-        <Version>1.0.0</Version>
+        <!-- General Project Information -->
+        <TargetFrameworks>netstandard2.1;net472</TargetFrameworks>
+        <AssemblyName>MaxWasUnavailable.Virality</AssemblyName>
+        <PackageId>MaxWasUnavailable.Virality</PackageId>
+        <Title>Virality</Title>
+        <Description>Extends the max number of players that can play in a lobby.</Description>
+        <Version>0.0.0</Version>
+        <Authors>MaxWasUnavailable;sovenance</Authors>
+        <PackageTags>content;warning;bepinex</PackageTags>
+
+        <!-- Package Information -->
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageLicenseExpression>LGPL-3.0-or-later</PackageLicenseExpression>
+        <PackageProjectUrl>https://github.com/MaxWasUnavailable/Virality</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/MaxWasUnavailable/Virality</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+
+        <!-- Build Information -->
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
         <LangVersion>latest</LangVersion>
+        <Nullable>enable</Nullable>
+
+        <!-- NuGet Information -->
+        <RestoreAdditionalProjectSources>
+            https://api.nuget.org/v3/index.json;
+            https://nuget.bepinex.dev/v3/index.json
+        </RestoreAdditionalProjectSources>
+
+        <!-- Auto Versioning -->
+        <MinVerDefaultPreReleaseIdentifiers>dev</MinVerDefaultPreReleaseIdentifiers>
+        <MinVerTagPrefix>v</MinVerTagPrefix>
+
+        <!-- Documentation -->
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+
+        <!-- Prevent Publicizer Warnings from Showing -->
+        <NoWarn>$(NoWarn);CS0436</NoWarn>
     </PropertyGroup>
 
+    <!-- Include README and CHANGELOG in the package -->
+    <ItemGroup>
+        <None Include="$(ProjectDir)../README.md" Pack="true" PackagePath="/"/>
+        <None Include="$(ProjectDir)../CHANGELOG.md" Pack="true" PackagePath="/"/>
+    </ItemGroup>
+
+    <!-- BepInEx Package References -->
     <ItemGroup>
         <PackageReference Include="BepInEx.Analyzers" Version="1.*" PrivateAssets="all"/>
         <PackageReference Include="BepInEx.Core" Version="5.*"/>
         <PackageReference Include="BepInEx.PluginInfoProps" Version="1.*"/>
-        <PackageReference Include="UnityEngine.Modules" Version="5.6.0" IncludeAssets="compile"/>
+        <PackageReference Include="UnityEngine.Modules" Version="2022.3.9" IncludeAssets="compile"/>
+        <PackageReference Include="BepInEx.AssemblyPublicizer.MSBuild" Version="0.4.1" PrivateAssets="all" ExcludeAssets="runtime"/>
+    </ItemGroup>
+
+    <!-- Extra Package References -->
+    <ItemGroup>
+        <PackageReference Include="MinVer" Version="4.*" PrivateAssets="all" Private="false"/>
+    </ItemGroup>
+
+    <!-- IDE Assemblies - Easier to Find Source Code -->
+    <ItemGroup Condition="$(CI) != 'true'">
+        <Reference Include="Assembly-CSharp" HintPath="$(CW_REFERENCES)\Assembly-CSharp.dll" Private="False" Publicize="true"/>
+        <Reference Include="Assembly-CSharp-firstpass" HintPath="$(CW_REFERENCES)\Assembly-CSharp-firstpass.dll" Private="False" Publicize="true"/>
     </ItemGroup>
 
     <ItemGroup Condition="'$(TargetFramework.TrimEnd(`0123456789`))' == 'net'">
         <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.2" PrivateAssets="all"/>
     </ItemGroup>
+
+    <!-- MinVer Set Mod Version from Git -->
+    <Target Name="SetPluginVersion" BeforeTargets="AddGeneratedFile" DependsOnTargets="MinVer">
+        <PropertyGroup>
+            <PlainVersion>$(MinVerMajor).$(MinVerMinor).$(MinVerPatch)</PlainVersion>
+            <BepInExPluginVersion>$(PlainVersion)</BepInExPluginVersion>
+        </PropertyGroup>
+    </Target>
+
+    <!-- Pack for Thunderstore -->
+    <Target
+            Name="ThunderstorePack"
+            AfterTargets="PostBuildEvent"
+            Condition="$(TargetFramework) == 'netstandard2.1' and $(Configuration) == 'Release' and $(CI) == 'true'"
+            DependsOnTargets="SetPluginVersion"
+    >
+        <Exec Command="dotnet tcli build --config-path $(ProjectDir)../assets/thunderstore.toml --package-version $(PlainVersion)"/>
+        <ItemGroup>
+            <FilesToRename Include="$(ProjectDir)../dist/*-$(PlainVersion).zip"/>
+        </ItemGroup>
+        <Move SourceFiles="@(FilesToRename)" DestinationFiles="@(FilesToRename -&gt; Replace($(PlainVersion), $(MinVerVersion)))"/>
+    </Target>
 </Project>
