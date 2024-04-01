@@ -6,10 +6,25 @@ namespace Virality.Patches;
 [HarmonyPriority(Priority.First)]
 internal static class SpawnHandlerPatches
 {
-    [HarmonyPostfix]
-    [HarmonyPatch(nameof(SpawnHandler.FindLocalSpawnIndex))]
-    private static void FindLocalSpawnIndexPostfix(ref SpawnHandler __instance)
+    [HarmonyPrefix]
+    [HarmonyPatch(nameof(SpawnHandler.GetSpawnPoint))]
+    private static void FindLocalSpawnIndexPostfix(ref SpawnHandler __instance, Spawns state)
     {
-        __instance.m_LocalSpawnIndex %= 4;
+        __instance.FindLocalSpawnIndex();
+        switch (state)
+        {
+            case Spawns.House:
+                __instance.m_LocalSpawnIndex %= __instance.m_HouseSpawns.Length;
+                break;
+            case Spawns.Hospital:
+                __instance.m_LocalSpawnIndex %= __instance.m_HospitalSpawns.Length;
+                break;
+            case Spawns.DiveBell:
+                __instance.m_LocalSpawnIndex %= __instance.m_DiveBellSpawns.Length;
+                break;
+            default:
+                break;
+                
+        }
     }
 }
