@@ -34,10 +34,10 @@ public class Virality : BaseUnityPlugin
         // Init config entries
         MaxPlayers = Config.Bind("General", "MaxPlayers", 10,
             "The maximum number of players allowed in your lobby.");
-        
-        AllowFriendJoining = Config.Bind("General", "AllowFriendJoining", true, 
+
+        AllowFriendJoining = Config.Bind("General", "AllowFriendJoining", true,
             "Whether or not to allow friends to join your lobby through the Steam overlay.");
-        
+
         AllowLateJoin = Config.Bind("General", "AllowLateJoin", true,
             "Whether or not to allow players to join your lobby after the game has started.");
 
