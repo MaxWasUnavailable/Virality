@@ -15,6 +15,6 @@ internal static class BedBossPatches
     [HarmonyPatch(nameof(BedBoss.OnPlayerJoined))]
     private static bool OnPlayerJoinedPrefix()
     {
-        return PlayerHandler.instance.players.Count < 4;
+        return PlayerHandler.instance.players.Count <= 4;
     }
 }
