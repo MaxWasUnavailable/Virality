@@ -1,3 +1,4 @@
+using System;
 using HarmonyLib;
 
 namespace Virality.Patches;
@@ -16,6 +17,6 @@ internal static class AllPlayersAsleep {
                 numberAsleep++;
         }
 
-        __result = numberAsleep >= 4;
+        __result = numberAsleep >= Math.Min(__instance.playerAlive.Count, 4);
     }
 }

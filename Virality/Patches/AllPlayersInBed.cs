@@ -1,3 +1,4 @@
+using System;
 using HarmonyLib;
 
 namespace Virality.Patches;
@@ -16,6 +17,6 @@ internal static class AllPlayersInBed {
                 numberInBed++;
         }
 
-        __result = numberInBed >= 4;
+        __result = numberInBed >= Math.Min(__instance.playerAlive.Count, 4);
     }
 }
