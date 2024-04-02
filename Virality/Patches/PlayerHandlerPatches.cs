@@ -18,13 +18,17 @@ internal static class PlayerHandlerPatches
     {
         if (!Virality.AllowLateJoin!.Value)
             return;
-        
+
         if (!SurfaceNetworkHandler.m_Started || !PhotonLobbyHelper.IsOnSurface())
             return;
 
         if (player.IsLocal)
             return;
-        
+
+        if (PhotonNetwork.IsMasterClient)
+            CurrentObjectiveTracker.SendCurrentObjective();
+
+
         Virality.Logger?.LogDebug("Running open door RPC.");
         SurfaceNetworkHandler.Instance.m_View.RPC("RPCA_OpenDoor", RpcTarget.OthersBuffered);
     }
