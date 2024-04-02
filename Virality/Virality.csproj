@@ -6,8 +6,8 @@
         <AssemblyName>MaxWasUnavailable.Virality</AssemblyName>
         <PackageId>MaxWasUnavailable.Virality</PackageId>
         <Title>Virality</Title>
-        <Description>Extends the max number of players that can play in a lobby.</Description>
-        <Version>0.0.0</Version>
+        <Description>Extends the max number of players that can play in a lobby, adds late joining, and proper Steam rich presence.</Description>
+        <Version>1.0.2</Version>
         <Authors>MaxWasUnavailable;sovenance</Authors>
         <PackageTags>content;warning;bepinex</PackageTags>
 

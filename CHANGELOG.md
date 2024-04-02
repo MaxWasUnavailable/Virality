@@ -15,6 +15,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+## [1.0.2] - 02/04/2024
+
+### Fixed
+- Added transpiler patch to fix new MainMenuHandler 4 player limit
+
 ## [1.0.0-pre.2] - 02/04/2024
 
 ### Changed
