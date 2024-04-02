@@ -29,4 +29,25 @@ public static class SteamLobbyHelper
     {
         return SteamUser.GetSteamID();
     }
+
+    /// <summary>
+    ///     Gets the current lobby ID.
+    /// </summary>
+    /// <returns> The current lobby ID. </returns>
+    public static CSteamID GetLobbyId()
+    {
+        return LobbyHandler!.m_CurrentLobby;
+    }
+
+    /// <summary>
+    ///     Adds rich presence for Steam to allow right-click join.
+    /// </summary>
+    public static void SetRichPresenceJoinable()
+    {
+        Virality.Logger?.LogDebug("Setting rich presence for joinable lobby.");
+        Virality.Logger?.LogDebug($"steam://joinlobby/{GetAppId()}/{GetLobbyId()}/{GetUserId()}");
+        
+        SteamFriends.SetRichPresence("connect",
+            $"steam://joinlobby/{GetAppId()}/{GetLobbyId()}/{GetUserId()}");
+    }
 }
