@@ -69,6 +69,8 @@ internal static class PhotonGameLobbyHandlerPatches
         if (!PhotonNetwork.IsMasterClient)
             return;
         
+        Virality.Logger?.LogDebug($"Setting current objective to {objective}.");
+        
         CurrentObjectiveTracker.CurrentObjective = objective;
     }
 }
