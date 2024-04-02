@@ -1,5 +1,4 @@
 using HarmonyLib;
-using Photon.Pun;
 using Virality.Helpers;
 
 namespace Virality.Patches;
@@ -10,7 +9,7 @@ internal static class SurfaceNetworkHandlerPatches
 {
     /// <summary>
     ///     Postfix patch for the RPCM_StartGame method.
-    ///     Allows late joining.
+    ///     Allows late joining if enabled.
     /// </summary>
     /// <param name="__instance"> Instance of the SurfaceNetworkHandler. </param>
     [HarmonyPostfix]
@@ -22,11 +21,22 @@ internal static class SurfaceNetworkHandlerPatches
 
         if (!PhotonLobbyHelper.IsOnSurface())
             return; // If we're not on the surface, we don't want to allow late joining.
-        
-        Virality.Logger?.LogDebug("Enabling late join.");
-        
-        __instance.m_SteamLobby.OpenLobby();
-        PhotonNetwork.CurrentRoom.IsOpen = true;
-        PhotonNetwork.CurrentRoom.IsVisible = true;
+
+        LateJoinHelper.EnableLateJoin();
+    }
+
+    /// <summary>
+    ///     Postfix patch for the OnSlept method.
+    ///     Re-enables late joining if enabled.
+    /// </summary>
+    /// <param name="__instance"> Instance of the SurfaceNetworkHandler. </param>
+    [HarmonyPostfix]
+    [HarmonyPatch(nameof(SurfaceNetworkHandler.OnSlept))]
+    private static void OnSleptPostfix(ref SurfaceNetworkHandler __instance)
+    {
+        if (!Virality.AllowLateJoin!.Value)
+            return;
+
+        LateJoinHelper.EnableLateJoin();
     }
 }
