@@ -23,6 +23,8 @@ internal static class SurfaceNetworkHandlerPatches
         if (!PhotonLobbyHelper.IsOnSurface())
             return; // If we're not on the surface, we don't want to allow late joining.
         
+        Virality.Logger?.LogDebug("Enabling late join.");
+        
         __instance.m_SteamLobby.OpenLobby();
         PhotonNetwork.CurrentRoom.IsOpen = true;
         PhotonNetwork.CurrentRoom.IsVisible = true;
