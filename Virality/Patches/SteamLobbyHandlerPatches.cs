@@ -35,7 +35,7 @@ internal static class SteamLobbyHandlerPatches
         
         var lobbyId = __instance.m_CurrentLobby;
         
-        SteamMatchmaking.SetLobbyType(lobbyId, ELobbyType.k_ELobbyTypeInvisible);
+        SteamMatchmaking.SetLobbyType(lobbyId, ELobbyType.k_ELobbyTypeFriendsOnly);
 
         SteamFriends.SetRichPresence("connect", 
             $"steam://joinlobby/{SteamLobbyHelper.GetAppId()}/{lobbyId}/{SteamLobbyHelper.GetUserId()}");
