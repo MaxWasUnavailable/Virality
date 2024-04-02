@@ -19,18 +19,18 @@ internal static class InviteFriendsTerminalPatches
     {
         if (SteamLobbyHelper.LobbyHandler == null)
             return true;
-        
+
         __result = PlayerHandler.instance.players.Count > SteamLobbyHelper.LobbyHandler.m_MaxPlayers;
         return false;
     }
-    
+
     [HarmonyPrefix]
     [HarmonyPatch(nameof(InviteFriendsTerminal.IsGameStarted), MethodType.Getter)]
     private static bool IsGameStartedPrefix(ref bool __result)
     {
         if (!Virality.AllowLateJoin!.Value)
             return true;
-        
+
         __result = false;
         return false;
     }

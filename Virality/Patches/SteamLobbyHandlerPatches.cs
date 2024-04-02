@@ -20,7 +20,7 @@ internal static class SteamLobbyHandlerPatches
         __instance.m_MaxPlayers = Virality.MaxPlayers!.Value;
         SteamLobbyHelper.LobbyHandler = __instance;
     }
-    
+
     /// <summary>
     ///     Postfix patch for the OnLobbyCreatedCallback method.
     ///     Updates Steam rich presence.
@@ -32,12 +32,12 @@ internal static class SteamLobbyHandlerPatches
     {
         if (!Virality.AllowFriendJoining!.Value)
             return;
-        
+
         var lobbyId = __instance.m_CurrentLobby;
-        
+
         SteamMatchmaking.SetLobbyType(lobbyId, ELobbyType.k_ELobbyTypeFriendsOnly);
 
-        SteamFriends.SetRichPresence("connect", 
+        SteamFriends.SetRichPresence("connect",
             $"steam://joinlobby/{SteamLobbyHelper.GetAppId()}/{lobbyId}/{SteamLobbyHelper.GetUserId()}");
     }
 }

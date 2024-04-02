@@ -11,7 +11,7 @@ public static class SteamLobbyHelper
     ///     The SteamLobbyHandler instance.
     /// </summary>
     public static SteamLobbyHandler? LobbyHandler { get; internal set; }
-    
+
     /// <summary>
     ///     Gets the current app ID.
     /// </summary>
