@@ -24,6 +24,12 @@ internal static class InviteFriendsTerminalPatches
         return false;
     }
 
+    /// <summary>
+    ///     Prefix patch for the IsGameStarted property's getter.
+    ///     Overrides the check with one that allows late joining if the config is enabled.
+    /// </summary>
+    /// <param name="__result"></param>
+    /// <returns></returns>
     [HarmonyPrefix]
     [HarmonyPatch(nameof(InviteFriendsTerminal.IsGameStarted), MethodType.Getter)]
     private static bool IsGameStartedPrefix(ref bool __result)
