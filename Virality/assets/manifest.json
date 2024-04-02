@@ -1,6 +1,6 @@
 {
   "name": "Virality",
-  "version_number": "1.0.0",
+  "version_number": "1.0.2",
   "website_url": "https://github.com/MaxWasUnavailable/Virality",
   "description": "Extends the max number of players that can play in a lobby, adds late joining, and proper Steam rich presence!",
   "dependencies": ["BepInEx-BepInExPack-5.4.2100"]
