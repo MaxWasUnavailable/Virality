@@ -14,9 +14,18 @@ internal static class PlayerHandlerPatches
     /// </summary>
     [HarmonyPostfix]
     [HarmonyPatch(nameof(PlayerHandler.AddPlayer))]
-    private static void AddPlayerPostfix()
+    private static void AddPlayerPostfix(Player player)
     {
-        if (SurfaceNetworkHandler.m_Started && PhotonLobbyHelper.IsOnSurface())
-            SurfaceNetworkHandler.Instance.m_View.RPC("RPCA_OpenDoor", RpcTarget.All);
+        if (!Virality.AllowLateJoin!.Value)
+            return;
+        
+        if (!SurfaceNetworkHandler.m_Started || !PhotonLobbyHelper.IsOnSurface())
+            return;
+
+        if (player.IsLocal)
+            return;
+        
+        Virality.Logger?.LogDebug("Running open door RPC.");
+        SurfaceNetworkHandler.Instance.m_View.RPC("RPCA_OpenDoor", RpcTarget.OthersBuffered);
     }
 }
