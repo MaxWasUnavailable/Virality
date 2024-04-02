@@ -33,11 +33,7 @@ internal static class SteamLobbyHandlerPatches
         if (!Virality.AllowFriendJoining!.Value)
             return;
 
-        var lobbyId = __instance.m_CurrentLobby;
-
-        SteamMatchmaking.SetLobbyType(lobbyId, ELobbyType.k_ELobbyTypeFriendsOnly);
-
-        SteamFriends.SetRichPresence("connect",
-            $"steam://joinlobby/{SteamLobbyHelper.GetAppId()}/{lobbyId}/{SteamLobbyHelper.GetUserId()}");
+        SteamMatchmaking.SetLobbyType(SteamLobbyHelper.GetLobbyId(), ELobbyType.k_ELobbyTypeFriendsOnly);
+        SteamLobbyHelper.SetRichPresenceJoinable();
     }
 }
