@@ -27,7 +27,9 @@ internal static class PhotonGameLobbyHandlerPatches
         SteamLobbyHelper.LobbyHandler?.HideLobby();
         PhotonNetwork.CurrentRoom.IsOpen = false;
         PhotonNetwork.CurrentRoom.IsVisible = false;
-        SteamFriends.ClearRichPresence();
+        
+        if (Virality.AllowFriendJoining!.Value)
+            SteamFriends.ClearRichPresence();
     }
 
     /// <summary>
@@ -37,13 +39,13 @@ internal static class PhotonGameLobbyHandlerPatches
     [HarmonyPatch(nameof(PhotonGameLobbyHandler.Start))]
     private static void StartPostfixOpen()
     {
+        Virality.Logger?.LogDebug("Checking if we should show the lobby.");
+        
         if (!Virality.AllowLateJoin!.Value)
             return;
 
+        Virality.Logger?.LogDebug("Checking if we're on the surface.");
         if (!PhotonLobbyHelper.IsOnSurface())
-            return;
-
-        if (!PhotonNetwork.CurrentRoom.IsOpen && !PhotonNetwork.CurrentRoom.IsVisible)
             return;
 
         Virality.Logger?.LogDebug("Showing lobby.");
@@ -51,6 +53,8 @@ internal static class PhotonGameLobbyHandlerPatches
         SteamLobbyHelper.LobbyHandler?.OpenLobby();
         PhotonNetwork.CurrentRoom.IsOpen = true;
         PhotonNetwork.CurrentRoom.IsVisible = true;
-        SteamLobbyHelper.SetRichPresenceJoinable();
+        
+        if (Virality.AllowFriendJoining!.Value)
+            SteamLobbyHelper.SetRichPresenceJoinable();
     }
 }
