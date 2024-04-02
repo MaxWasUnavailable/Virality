@@ -32,9 +32,9 @@ internal static class PhotonGameLobbyHandlerPatches
     ///     Postfix patch for the SetCurrentObjective method.
     /// </summary>
     /// <param name="objective"> The objective to set. </param>
-    [HarmonyPostfix]
+    [HarmonyPrefix]
     [HarmonyPatch(nameof(PhotonGameLobbyHandler.SetCurrentObjective))]
-    private static bool SetCurrentObjectivePostfix(Objective objective)
+    private static bool SetCurrentObjectivePostfix(ref Objective objective)
     {
         if (!PhotonNetwork.IsMasterClient)
             return true;
