@@ -1,5 +1,6 @@
 using HarmonyLib;
 using Photon.Pun;
+using Steamworks;
 using Virality.Helpers;
 
 namespace Virality.Patches;
@@ -23,5 +24,6 @@ internal static class PhotonGameLobbyHandlerPatches
         SteamLobbyHelper.LobbyHandler?.HideLobby();
         PhotonNetwork.CurrentRoom.IsOpen = false;
         PhotonNetwork.CurrentRoom.IsVisible = false;
+        SteamFriends.ClearRichPresence();
     }
 }
