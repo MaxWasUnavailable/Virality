@@ -27,7 +27,7 @@ internal static class PhotonGameLobbyHandlerPatches
         SteamLobbyHelper.LobbyHandler?.HideLobby();
         PhotonNetwork.CurrentRoom.IsOpen = false;
         PhotonNetwork.CurrentRoom.IsVisible = false;
-        
+
         if (Virality.AllowFriendJoining!.Value)
             SteamFriends.ClearRichPresence();
     }
@@ -40,7 +40,7 @@ internal static class PhotonGameLobbyHandlerPatches
     private static void StartPostfixOpen()
     {
         Virality.Logger?.LogDebug("Checking if we should show the lobby.");
-        
+
         if (!Virality.AllowLateJoin!.Value)
             return;
 
@@ -53,24 +53,30 @@ internal static class PhotonGameLobbyHandlerPatches
         SteamLobbyHelper.LobbyHandler?.OpenLobby();
         PhotonNetwork.CurrentRoom.IsOpen = true;
         PhotonNetwork.CurrentRoom.IsVisible = true;
-        
+
         if (Virality.AllowFriendJoining!.Value)
             SteamLobbyHelper.SetRichPresenceJoinable();
     }
-    
+
     /// <summary>
     ///     Postfix patch for the SetCurrentObjective method.
     /// </summary>
     /// <param name="objective"> The objective to set. </param>
     [HarmonyPostfix]
     [HarmonyPatch(nameof(PhotonGameLobbyHandler.SetCurrentObjective))]
-    private static void SetCurrentObjectivePostfix(Objective objective)
+    private static bool SetCurrentObjectivePostfix(Objective objective)
     {
         if (!PhotonNetwork.IsMasterClient)
-            return;
-        
+            return true;
+
+        if (objective is LeaveHouseObjective &&
+            CurrentObjectiveTracker.CurrentObjective is not (InviteFriendsObjective or LeaveHouseObjective))
+            return false;   // Redundant RPC calls if we're already past these objectives.
+
         Virality.Logger?.LogDebug($"Setting current objective to {objective}.");
-        
+
         CurrentObjectiveTracker.CurrentObjective = objective;
+
+        return true;
     }
 }
