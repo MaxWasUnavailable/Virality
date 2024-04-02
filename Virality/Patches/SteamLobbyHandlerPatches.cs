@@ -19,6 +19,7 @@ internal static class SteamLobbyHandlerPatches
     {
         __instance.m_MaxPlayers = Virality.MaxPlayers!.Value;
         SteamLobbyHelper.LobbyHandler = __instance;
+        Virality.Logger?.LogDebug($"Max players set to {__instance.m_MaxPlayers}.");
     }
 
     /// <summary>
