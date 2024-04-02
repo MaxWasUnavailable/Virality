@@ -1,4 +1,5 @@
 using HarmonyLib;
+using Virality.Helpers;
 
 namespace Virality.Patches;
 
@@ -16,5 +17,12 @@ internal static class SteamLobbyHandlerPatches
     private static void HostMatchPrefix(ref SteamLobbyHandler __instance)
     {
         __instance.m_MaxPlayers = Virality.MaxPlayers!.Value;
+    }
+    
+    [HarmonyPostfix]
+    [HarmonyPatch(nameof(SteamLobbyHandler), MethodType.Constructor)]
+    private static void ConstructorPostfix(ref SteamLobbyHandler __instance)
+    {
+        SteamLobbyHelper.LobbyHandler = __instance;
     }
 }
