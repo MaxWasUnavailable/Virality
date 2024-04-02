@@ -57,4 +57,18 @@ internal static class PhotonGameLobbyHandlerPatches
         if (Virality.AllowFriendJoining!.Value)
             SteamLobbyHelper.SetRichPresenceJoinable();
     }
+    
+    /// <summary>
+    ///     Postfix patch for the SetCurrentObjective method.
+    /// </summary>
+    /// <param name="objective"> The objective to set. </param>
+    [HarmonyPostfix]
+    [HarmonyPatch(nameof(PhotonGameLobbyHandler.SetCurrentObjective))]
+    private static void SetCurrentObjectivePostfix(Objective objective)
+    {
+        if (!PhotonNetwork.IsMasterClient)
+            return;
+        
+        CurrentObjectiveTracker.CurrentObjective = objective;
+    }
 }
