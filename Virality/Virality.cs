@@ -32,7 +32,7 @@ public class Virality : BaseUnityPlugin
         Logger = base.Logger;
 
         // Init config entries
-        MaxPlayers = Config.Bind("General", "MaxPlayers", 10,
+        MaxPlayers = Config.Bind("General", "MaxPlayers", 12,
             "The maximum number of players allowed in your lobby.");
 
         AllowFriendJoining = Config.Bind("General", "AllowFriendJoining", true,
