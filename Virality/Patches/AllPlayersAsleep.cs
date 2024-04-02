@@ -8,7 +8,7 @@ namespace Virality.Patches;
 internal static class AllPlayersAsleep {
     [HarmonyPostfix]
     [HarmonyPatch(nameof(PlayerHandler.AllPlayersAsleep))]
-    private static void AllPlayersInBedPostfix(PlayerHandler __instance, ref bool __result)
+    private static void AllPlayersAsleepPostfix(PlayerHandler __instance, ref bool __result)
     {
         var numberAsleep = 0;
         for (var i = 0; i < __instance.playerAlive.Count; i++)
