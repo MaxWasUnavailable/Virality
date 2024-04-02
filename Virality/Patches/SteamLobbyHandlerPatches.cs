@@ -1,4 +1,5 @@
 using HarmonyLib;
+using Steamworks;
 using Virality.Helpers;
 
 namespace Virality.Patches;
@@ -18,5 +19,25 @@ internal static class SteamLobbyHandlerPatches
     {
         __instance.m_MaxPlayers = Virality.MaxPlayers!.Value;
         SteamLobbyHelper.LobbyHandler = __instance;
+    }
+    
+    /// <summary>
+    ///     Postfix patch for the OnLobbyCreatedCallback method.
+    ///     Updates Steam rich presence.
+    /// </summary>
+    /// <param name="__instance"> Instance of the SteamLobbyHandler. </param>
+    [HarmonyPostfix]
+    [HarmonyPatch(nameof(SteamLobbyHandler.OnLobbyCreatedCallback))]
+    private static void OnLobbyCreatedCallbackPostfix(ref SteamLobbyHandler __instance)
+    {
+        if (!Virality.AllowFriendJoining!.Value)
+            return;
+        
+        var lobbyId = __instance.m_CurrentLobby;
+        
+        SteamMatchmaking.SetLobbyType(lobbyId, ELobbyType.k_ELobbyTypeInvisible);
+
+        SteamFriends.SetRichPresence("connect", 
+            $"steam://joinlobby/{SteamLobbyHelper.GetAppId()}/{lobbyId}/{SteamLobbyHelper.GetUserId()}");
     }
 }
