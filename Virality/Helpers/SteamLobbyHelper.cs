@@ -44,9 +44,6 @@ public static class SteamLobbyHelper
     /// </summary>
     public static void SetRichPresenceJoinable()
     {
-        Virality.Logger?.LogDebug("Setting rich presence for joinable lobby.");
-        Virality.Logger?.LogDebug($"steam://joinlobby/{GetAppId()}/{GetLobbyId()}/{GetUserId()}");
-        
         SteamFriends.SetRichPresence("connect",
             $"steam://joinlobby/{GetAppId()}/{GetLobbyId()}/{GetUserId()}");
     }
