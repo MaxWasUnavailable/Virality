@@ -61,7 +61,7 @@
     </ItemGroup>
 
     <!-- IDE Assemblies - Easier to Find Source Code -->
-    <ItemGroup Condition="$(CI) == 'true'">
+    <ItemGroup Condition="$(CI) != 'true'">
         <Reference Include="Assembly-CSharp" HintPath="$(CW_REFERENCES)\Assembly-CSharp.dll" Private="False" Publicize="true"/>
         <Reference Include="Assembly-CSharp-firstpass" HintPath="$(CW_REFERENCES)\Assembly-CSharp-firstpass.dll" Private="False" Publicize="true"/>
         <Reference Include="Steamworks" HintPath="$(CW_REFERENCES)\com.rlabrecque.steamworks.net.dll" Private="False" Publicize="true"/>
@@ -69,7 +69,7 @@
         <Reference Include="PhotonRealtime" HintPath="$(CW_REFERENCES)\PhotonRealtime.dll" Private="False" Publicize="true"/>
     </ItemGroup>
     
-    <ItemGroup Condition="$(CI) != 'true'" >
+    <ItemGroup Condition="$(CI) == 'true'" >
         <PackageReference Include="ContentWarning.Libs" Version="1.7.1.1" Publicize="true" Private="False" PrivateAssets="all"/>
     </ItemGroup>
 
