@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <!-- General Project Information -->
-        <TargetFrameworks>netstandard2.1;net472</TargetFrameworks>
+        <TargetFramework>net472</TargetFramework>
         <AssemblyName>MaxWasUnavailable.Virality</AssemblyName>
         <PackageId>MaxWasUnavailable.Virality</PackageId>
         <Title>Virality</Title>
