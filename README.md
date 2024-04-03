@@ -5,7 +5,6 @@
 [![Build](https://img.shields.io/github/actions/workflow/status/MaxWasUnavailable/Virality/build.yml?style=for-the-badge&logo=github&branch=master)](https://github.com/MaxWasUnavailable/Virality/actions/workflows/build.yml)
 [![Latest Version](https://img.shields.io/thunderstore/v/MaxWasUnavailable/Virality?style=for-the-badge&logo=thunderstore&logoColor=white)](https://thunderstore.io/c/content-warning/p/MaxWasUnavailable/Virality)
 [![Thunderstore Downloads](https://img.shields.io/thunderstore/dt/MaxWasUnavailable/Virality?style=for-the-badge&logo=thunderstore&logoColor=white)](https://thunderstore.io/c/content-warning/p/MaxWasUnavailable/Virality)
-[![NuGet Version](https://img.shields.io/nuget/v/MaxWasUnavailable.Virality?style=for-the-badge&logo=nuget)](https://www.nuget.org/packages/MaxWasUnavailable.Virality)
 
 ## Features
 - Bigger lobby sizes (configurable limit)
