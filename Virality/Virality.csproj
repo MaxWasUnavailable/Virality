@@ -2,13 +2,13 @@
 
     <PropertyGroup>
         <!-- General Project Information -->
-        <TargetFramework>net472</TargetFramework>
+        <TargetFramework>netstandard2.1</TargetFramework>
         <AssemblyName>MaxWasUnavailable.Virality</AssemblyName>
         <PackageId>MaxWasUnavailable.Virality</PackageId>
         <Title>Virality</Title>
         <Description>Extends the max number of players that can play in a lobby, adds late joining, and proper Steam rich presence.</Description>
         <Version>1.0.2</Version>
-        <Authors>MaxWasUnavailable;sovenance</Authors>
+        <Authors>MaxWasUnavailable;Day</Authors>
         <PackageTags>content;warning;bepinex</PackageTags>
 
         <!-- Package Information -->
@@ -61,7 +61,7 @@
     </ItemGroup>
 
     <!-- IDE Assemblies - Easier to Find Source Code -->
-    <ItemGroup Condition="$(CI) != 'true'">
+    <ItemGroup Condition="$(CI) == 'true'">
         <Reference Include="Assembly-CSharp" HintPath="$(CW_REFERENCES)\Assembly-CSharp.dll" Private="False" Publicize="true"/>
         <Reference Include="Assembly-CSharp-firstpass" HintPath="$(CW_REFERENCES)\Assembly-CSharp-firstpass.dll" Private="False" Publicize="true"/>
         <Reference Include="Steamworks" HintPath="$(CW_REFERENCES)\com.rlabrecque.steamworks.net.dll" Private="False" Publicize="true"/>
@@ -69,8 +69,8 @@
         <Reference Include="PhotonRealtime" HintPath="$(CW_REFERENCES)\PhotonRealtime.dll" Private="False" Publicize="true"/>
     </ItemGroup>
     
-    <ItemGroup Condition="$(CI) == 'true'" >
-        <PackageReference Include="ContentWarning.Libs" Version="1.6.2" Publicize="true" Private="False" PrivateAssets="all"/>
+    <ItemGroup Condition="$(CI) != 'true'" >
+        <PackageReference Include="ContentWarning.Libs" Version="1.7.1.1" Publicize="true" Private="False" PrivateAssets="all"/>
     </ItemGroup>
 
     <ItemGroup Condition="'$(TargetFramework.TrimEnd(`0123456789`))' == 'net'">
