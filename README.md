@@ -20,5 +20,5 @@
 - BepInEx LTS (5.4.22)
 
 ## Credits
-- Day (Little Llama) -- Bed patches, support, testing
+- Day -- Bed patches, support, testing
 - sovenance -- Mod name idea
