@@ -1,5 +1,7 @@
 # Virality
 
+## ***WARNING***: MODS RELATING TO LARGER LOBBY SIZES CURRENTLY DO NOT WORK DUE TO SERVER LIMITATIONS
+
 *A better multiplayer mod for Content Warning*
 
 [![Build](https://img.shields.io/github/actions/workflow/status/MaxWasUnavailable/Virality/build.yml?style=for-the-badge&logo=github&branch=master)](https://github.com/MaxWasUnavailable/Virality/actions/workflows/build.yml)
