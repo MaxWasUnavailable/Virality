@@ -35,7 +35,8 @@ Virality. Doing this will bump the maximum player limit to 16.
 
 ## Requirements
 
-- BepInEx LTS (5.4.22)
+- BepInEx LTS (5.4.22 or 5.4.21)
+- Self Sufficient (optional, but currently necessary for bigger lobbies)
 
 ## Credits
 

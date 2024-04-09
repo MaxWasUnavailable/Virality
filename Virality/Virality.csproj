@@ -44,6 +44,7 @@
     <ItemGroup>
         <None Include="$(ProjectDir)../README.md" Pack="true" PackagePath="/"/>
         <None Include="$(ProjectDir)../CHANGELOG.md" Pack="true" PackagePath="/"/>
+        <None Include="$(ProjectDir)../assets/thunderstore.toml" PackagePath="/"/>
     </ItemGroup>
 
     <!-- BepInEx Package References -->
