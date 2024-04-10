@@ -27,7 +27,7 @@ internal static class PlayerHandlerPatches
             return;
 
         Virality.Logger?.LogDebug("Running open door RPC.");
-        SurfaceNetworkHandler.Instance.m_View.RPC("RPCA_OpenDoor", RpcTarget.OthersBuffered);
+        SurfaceNetworkHandler.Instance.m_View.RPC("RPCA_OpenDoor", player.refs.view.Controller);
 
         if (PhotonNetwork.IsMasterClient)
             CurrentObjectiveTracker.SendCurrentObjective();
