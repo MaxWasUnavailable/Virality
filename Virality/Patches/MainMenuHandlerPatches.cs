@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Reflection.Emit;
 using HarmonyLib;
+using Virality.State;
 
 namespace Virality.Patches;
 
@@ -21,6 +22,6 @@ internal static class MainMenuHandlerPatches
 
     public static int GetMaxPlayers()
     {
-        return Virality.MaxPlayers!.Value;
+        return PhotonLobbyLimitTracker.PlayerLimit ?? Virality.MaxPlayers!.Value;
     }
 }
