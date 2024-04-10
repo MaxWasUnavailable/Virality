@@ -1,4 +1,5 @@
 using Photon.Pun;
+using Virality.State;
 
 namespace Virality.Helpers;
 
@@ -30,7 +31,7 @@ public static class PhotonLobbyHelper
     /// </summary>
     public static void SetLobbyMaxToConfig()
     {
-        SetLobbyMaxPlayers(Virality.MaxPlayers!.Value);
+        SetLobbyMaxPlayers(PhotonLobbyLimitTracker.PlayerLimit ?? Virality.MaxPlayers!.Value);
     }
     
     /// <summary>

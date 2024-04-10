@@ -1,4 +1,5 @@
 using Steamworks;
+using Virality.State;
 
 namespace Virality.Helpers;
 
@@ -62,6 +63,6 @@ public static class SteamLobbyHelper
     /// </summary>
     public static void SetLobbyMaxToConfig()
     {
-        SetLobbyMaxPlayers(Virality.MaxPlayers!.Value);
+        SetLobbyMaxPlayers(PhotonLobbyLimitTracker.PlayerLimit ?? Virality.MaxPlayers!.Value);
     }
 }
