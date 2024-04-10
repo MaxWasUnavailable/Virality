@@ -25,6 +25,9 @@ public static class PhotonLobbyHelper
         PhotonNetwork.CurrentRoom.MaxPlayers = maxPlayers;
     }
     
+    /// <summary>
+    ///     Sets the maximum number of players allowed in the lobby to the value in the config.
+    /// </summary>
     public static void SetLobbyMaxToConfig()
     {
         SetLobbyMaxPlayers(Virality.MaxPlayers!.Value);
