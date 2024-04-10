@@ -15,7 +15,12 @@ internal static class MainMenuHandlerPatches
         return new CodeMatcher(instructions)
             .SearchForward(instruction => instruction.opcode == OpCodes.Ldc_I4_4)
             .ThrowIfInvalid("Could not find max players constant")
-            .SetInstructionAndAdvance(new CodeInstruction(OpCodes.Ldc_I4, Virality.MaxPlayers!.Value))
+            .SetInstructionAndAdvance(new CodeInstruction(OpCodes.Call, AccessTools.Method(typeof(MainMenuHandlerPatches), nameof(GetMaxPlayers))))
             .InstructionEnumeration();
+    }
+
+    public static int GetMaxPlayers()
+    {
+        return Virality.MaxPlayers!.Value;
     }
 }
