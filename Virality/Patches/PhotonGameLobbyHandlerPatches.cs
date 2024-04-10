@@ -2,6 +2,7 @@ using HarmonyLib;
 using Photon.Pun;
 using Steamworks;
 using Virality.Helpers;
+using Virality.State;
 
 namespace Virality.Patches;
 

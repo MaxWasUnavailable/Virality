@@ -1,5 +1,6 @@
 using HarmonyLib;
 using Virality.Helpers;
+using Virality.State;
 
 namespace Virality.Patches;
 
@@ -22,6 +23,7 @@ internal static class SurfaceNetworkHandlerPatches
         if (!PhotonLobbyHelper.IsOnSurface())
             return; // If we're not on the surface, we don't want to allow late joining.
 
+        DoorOpenTracker.IsDoorOpen = true;
         LateJoinHelper.EnableLateJoin();
     }
 
