@@ -17,6 +17,9 @@ internal static class SurfaceNetworkHandlerPatches
     [HarmonyPatch(nameof(SurfaceNetworkHandler.RPCM_StartGame))]
     private static void RPCM_StartGamePostfix(ref SurfaceNetworkHandler __instance)
     {
+        if (!PhotonLobbyHelper.IsMasterClient())
+            return;
+
         if (!Virality.AllowLateJoin!.Value)
             return;
 
@@ -36,6 +39,9 @@ internal static class SurfaceNetworkHandlerPatches
     [HarmonyPatch(nameof(SurfaceNetworkHandler.OnSlept))]
     private static void OnSleptPostfix(ref SurfaceNetworkHandler __instance)
     {
+        if (!PhotonLobbyHelper.IsMasterClient())
+            return;
+
         if (!Virality.AllowLateJoin!.Value)
             return;
 

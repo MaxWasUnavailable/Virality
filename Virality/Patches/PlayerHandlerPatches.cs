@@ -37,10 +37,10 @@ internal static class PlayerHandlerPatches
     [HarmonyPatch(nameof(PlayerHandler.AddPlayer))]
     private static void AddPlayerPostfixSyncObjective(Player player)
     {
-        if (!Virality.AllowLateJoin!.Value)
+        if (!PhotonLobbyHelper.IsMasterClient())
             return;
 
-        if (!PhotonLobbyHelper.IsMasterClient())
+        if (!Virality.AllowLateJoin!.Value)
             return;
 
         SyncObjectiveRPC(player);

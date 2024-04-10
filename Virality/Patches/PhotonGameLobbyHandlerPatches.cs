@@ -1,6 +1,4 @@
 using HarmonyLib;
-using Photon.Pun;
-using Steamworks;
 using Virality.Helpers;
 using Virality.State;
 
@@ -17,6 +15,9 @@ internal static class PhotonGameLobbyHandlerPatches
     [HarmonyPatch(nameof(PhotonGameLobbyHandler.Start))]
     private static void StartPostfixHide()
     {
+        if (!PhotonLobbyHelper.IsMasterClient())
+            return;
+        
         if (!Virality.AllowLateJoin!.Value)
             return;
 
@@ -24,9 +25,6 @@ internal static class PhotonGameLobbyHandlerPatches
             return;
         
         LateJoinHelper.DisableLateJoin();
-
-        if (Virality.AllowFriendJoining!.Value)
-            SteamFriends.ClearRichPresence();
     }
 
     /// <summary>
@@ -37,7 +35,7 @@ internal static class PhotonGameLobbyHandlerPatches
     [HarmonyPatch(nameof(PhotonGameLobbyHandler.SetCurrentObjective))]
     private static bool SetCurrentObjectivePostfix(ref Objective objective)
     {
-        if (!PhotonNetwork.IsMasterClient)
+        if (!PhotonLobbyHelper.IsMasterClient())
             return true;
 
         if (objective is LeaveHouseObjective &&

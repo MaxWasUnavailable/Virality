@@ -8,7 +8,7 @@ namespace Virality.Patches;
 internal static class EscapeMenuMainPagePatches
 {
     /// <summary>
-    ///     Prefix for the Update method. This method currently only checks whether to hide the invite button.
+    ///     Prefix for the Update method. Which currently only checks whether to hide the invite button.
     /// </summary>
     /// <returns> Whether to run the original method. </returns>
     [HarmonyPrefix]
