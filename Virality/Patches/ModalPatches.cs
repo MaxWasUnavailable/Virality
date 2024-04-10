@@ -61,5 +61,6 @@ internal static class ModalPatches
     private static void CancelPhotonLobbyLimitOverride()
     {
         PhotonLobbyLimitTracker.PlayerLimit = null;
+        Virality.Logger?.LogWarning("Photon lobby limit override cancelled.");
     }
 }
