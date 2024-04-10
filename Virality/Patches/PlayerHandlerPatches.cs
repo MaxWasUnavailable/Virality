@@ -1,7 +1,7 @@
 using System;
 using HarmonyLib;
-using Photon.Pun;
 using Virality.Helpers;
+using Virality.State;
 
 namespace Virality.Patches;
 
@@ -11,25 +11,62 @@ internal static class PlayerHandlerPatches
 {
     /// <summary>
     ///     Postfix patch for the AddPlayer method.
-    ///     Runs the open door RPC to fix a late join issue.
+    ///     Opens the door for late joiners.
     /// </summary>
     [HarmonyPostfix]
     [HarmonyPatch(nameof(PlayerHandler.AddPlayer))]
-    private static void AddPlayerPostfix(Player player)
+    private static void AddPlayerPostfixOpenDoor(Player player)
     {
         if (!Virality.AllowLateJoin!.Value)
             return;
 
-        if (!SurfaceNetworkHandler.m_Started || !PhotonLobbyHelper.IsOnSurface())
+        if (!DoorOpenTracker.IsDoorOpen || !PhotonLobbyHelper.IsOnSurface())
             return;
 
-        if (player.IsLocal)
+        if (!PhotonLobbyHelper.IsMasterClient())
             return;
 
+        SendDoorOpenRPC(player);
+    }
+
+    /// <summary>
+    ///     Postfix patch for the AddPlayer method.
+    ///     Syncs the current objective with late joiners.
+    /// </summary>
+    [HarmonyPostfix]
+    [HarmonyPatch(nameof(PlayerHandler.AddPlayer))]
+    private static void AddPlayerPostfixSyncObjective(Player player)
+    {
+        if (!Virality.AllowLateJoin!.Value)
+            return;
+
+        if (!PhotonLobbyHelper.IsMasterClient())
+            return;
+
+        SyncObjectiveRPC(player);
+    }
+
+    /// <summary>
+    ///     Sends an RPC to open the door for the target player.
+    /// </summary>
+    /// <param name="player"> The player to open the door for. </param>
+    private static void SendDoorOpenRPC(Player player)
+    {
         SurfaceNetworkHandler.Instance.m_View.RPC("RPCA_OpenDoor", player.refs.view.Controller);
+    }
 
-        if (PhotonNetwork.IsMasterClient)
-            CurrentObjectiveTracker.SendCurrentObjective();
+    /// <summary>
+    ///     Syncs the current objective with the target player.
+    /// </summary>
+    /// <param name="player"> The player to sync the objective with. </param>
+    private static void SyncObjectiveRPC(Player player)
+    {
+        var currentObjective = CurrentObjectiveTracker.CurrentObjective;
+        if (currentObjective == null)
+            return;
+
+        PhotonGameLobbyHandler.Instance.photonView.RPC("RPC_SetCurrentObjective", player.refs.view.Controller,
+            ObjectiveDatabase.GetIndex(currentObjective));
     }
 
     /// <summary>
