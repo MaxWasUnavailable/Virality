@@ -74,7 +74,7 @@
     </ItemGroup>
     
     <ItemGroup Condition="$(CI) == 'true'" >
-        <PackageReference Include="ContentWarning.Libs" Version="1.7.1.1" Publicize="true" Private="False" PrivateAssets="all"/>
+        <PackageReference Include="ContentWarning.GameLibs.Steam" Version="*" Publicize="true" Private="False" PrivateAssets="all"/>
     </ItemGroup>
 
     <ItemGroup Condition="'$(TargetFramework.TrimEnd(`0123456789`))' == 'net'">
