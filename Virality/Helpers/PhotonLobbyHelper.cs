@@ -32,4 +32,13 @@ public static class PhotonLobbyHelper
     {
         SetLobbyMaxPlayers(Virality.MaxPlayers!.Value);
     }
+    
+    /// <summary>
+    ///     Checks if the local player is the master client.
+    /// </summary>
+    /// <returns></returns>
+    public static bool IsMasterClient()
+    {
+        return PhotonNetwork.IsMasterClient;
+    }
 }
