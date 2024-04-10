@@ -23,7 +23,7 @@ internal static class ModalPatches
         if (title.ToLower() != PhotonRoomErrorTitle)
             return;
 
-        if (!body.Contains(PhotonLobbyLimitBodyPartial))
+        if (!body.ToLower().Contains(PhotonLobbyLimitBodyPartial))
             return;
 
         var lobbyLimit = int.Parse(body.Split(':').Last());
