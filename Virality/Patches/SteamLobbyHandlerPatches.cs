@@ -20,20 +20,4 @@ internal static class SteamLobbyHandlerPatches
         SteamLobbyHelper.LobbyHandler = __instance;
         SteamLobbyHelper.SetLobbyMaxToConfig();
     }
-
-    /// <summary>
-    ///     Postfix patch for the OnLobbyCreatedCallback method.
-    ///     Updates Steam rich presence.
-    /// </summary>
-    /// <param name="__instance"> Instance of the SteamLobbyHandler. </param>
-    [HarmonyPostfix]
-    [HarmonyPatch(nameof(SteamLobbyHandler.OnLobbyCreatedCallback))]
-    private static void OnLobbyCreatedCallbackPostfix(ref SteamLobbyHandler __instance)
-    {
-        if (!Virality.AllowFriendJoining!.Value)
-            return;
-
-        SteamMatchmaking.SetLobbyType(SteamLobbyHelper.GetLobbyId(), ELobbyType.k_ELobbyTypeFriendsOnly);
-        SteamLobbyHelper.SetRichPresenceJoinable();
-    }
 }

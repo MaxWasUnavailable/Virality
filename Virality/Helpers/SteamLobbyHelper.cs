@@ -39,15 +39,6 @@ public static class SteamLobbyHelper
     {
         return LobbyHandler!.m_CurrentLobby;
     }
-
-    /// <summary>
-    ///     Adds rich presence for Steam to allow right-click join.
-    /// </summary>
-    public static void SetRichPresenceJoinable()
-    {
-        SteamFriends.SetRichPresence("connect",
-            $"steam://joinlobby/{GetAppId()}/{GetLobbyId()}/{GetUserId()}");
-    }
     
     /// <summary>
     ///     Sets the maximum number of players allowed in the lobby.
