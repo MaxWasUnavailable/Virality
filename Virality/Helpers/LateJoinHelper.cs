@@ -8,6 +8,11 @@ namespace Virality.Helpers;
 public static class LateJoinHelper
 {
     /// <summary>
+    ///     Whether late joining is currently allowed.
+    /// </summary>
+    public static bool IsLateJoinAllowed { get; private set; }
+    
+    /// <summary>
     ///     Enables late joining.
     /// </summary>
     public static void EnableLateJoin()
@@ -17,6 +22,7 @@ public static class LateJoinHelper
         SteamLobbyHelper.LobbyHandler!.OpenLobby();
         PhotonNetwork.CurrentRoom.IsOpen = true;
         PhotonNetwork.CurrentRoom.IsVisible = true;
+        IsLateJoinAllowed = true;
     }
     
     /// <summary>
@@ -29,6 +35,6 @@ public static class LateJoinHelper
         SteamLobbyHelper.LobbyHandler!.HideLobby();
         PhotonNetwork.CurrentRoom.IsOpen = false;
         PhotonNetwork.CurrentRoom.IsVisible = false;
-        
+        IsLateJoinAllowed = false;
     }
 }
