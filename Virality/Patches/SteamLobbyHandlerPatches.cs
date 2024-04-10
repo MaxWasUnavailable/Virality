@@ -17,9 +17,8 @@ internal static class SteamLobbyHandlerPatches
     [HarmonyPatch(nameof(SteamLobbyHandler.HostMatch))]
     private static void HostMatchPrefix(ref SteamLobbyHandler __instance)
     {
-        __instance.m_MaxPlayers = Virality.MaxPlayers!.Value;
         SteamLobbyHelper.LobbyHandler = __instance;
-        Virality.Logger?.LogDebug($"Max players set to {__instance.m_MaxPlayers}.");
+        SteamLobbyHelper.SetLobbyMaxToConfig();
     }
 
     /// <summary>
