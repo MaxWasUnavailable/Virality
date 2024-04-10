@@ -11,7 +11,7 @@ public static class LateJoinHelper
     ///     Whether late joining is currently allowed.
     /// </summary>
     public static bool IsLateJoinAllowed { get; private set; }
-    
+
     /// <summary>
     ///     Enables late joining.
     /// </summary>
@@ -24,14 +24,14 @@ public static class LateJoinHelper
         PhotonNetwork.CurrentRoom.IsVisible = true;
         IsLateJoinAllowed = true;
     }
-    
+
     /// <summary>
     ///     Disables late joining.
     /// </summary>
     public static void DisableLateJoin()
     {
         Virality.Logger?.LogDebug("Disabling late join.");
-        
+
         SteamLobbyHelper.LobbyHandler!.HideLobby();
         PhotonNetwork.CurrentRoom.IsOpen = false;
         PhotonNetwork.CurrentRoom.IsVisible = false;

@@ -16,7 +16,7 @@ public static class PhotonLobbyHelper
     {
         return PhotonGameLobbyHandler.IsSurface;
     }
-    
+
     /// <summary>
     ///     Sets the maximum number of players allowed in the lobby.
     /// </summary>
@@ -25,7 +25,7 @@ public static class PhotonLobbyHelper
     {
         PhotonNetwork.CurrentRoom.MaxPlayers = maxPlayers;
     }
-    
+
     /// <summary>
     ///     Sets the maximum number of players allowed in the lobby to the value in the config.
     /// </summary>
@@ -33,7 +33,7 @@ public static class PhotonLobbyHelper
     {
         SetLobbyMaxPlayers(PhotonLobbyLimitTracker.PlayerLimit ?? Virality.MaxPlayers!.Value);
     }
-    
+
     /// <summary>
     ///     Checks if the local player is the master client.
     /// </summary>

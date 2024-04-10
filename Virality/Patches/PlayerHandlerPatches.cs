@@ -25,7 +25,7 @@ internal static class PlayerHandlerPatches
 
         if (!PhotonLobbyHelper.IsMasterClient())
             return;
-        
+
         if (player.IsLocal)
             return;
 

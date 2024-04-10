@@ -17,13 +17,13 @@ internal static class PhotonGameLobbyHandlerPatches
     {
         if (!PhotonLobbyHelper.IsMasterClient())
             return;
-        
+
         if (!Virality.AllowLateJoin!.Value)
             return;
 
         if (PhotonLobbyHelper.IsOnSurface())
             return;
-        
+
         LateJoinHelper.DisableLateJoin();
     }
 
@@ -40,7 +40,7 @@ internal static class PhotonGameLobbyHandlerPatches
 
         if (objective is LeaveHouseObjective &&
             CurrentObjectiveTracker.CurrentObjective is not (InviteFriendsObjective or LeaveHouseObjective))
-            return false;   // Redundant RPC calls if we're already past these objectives.
+            return false; // Redundant RPC calls if we're already past these objectives.
 
         Virality.Logger?.LogDebug($"Setting current objective to {objective}.");
 

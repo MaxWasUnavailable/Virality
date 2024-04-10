@@ -10,7 +10,7 @@ internal static class ModalPatches
 {
     private const string PhotonRoomErrorTitle = "failed to create photon room";
     private const string PhotonLobbyLimitBodyPartial = "max players peer room value is too big";
-    
+
     private static bool IsPhotonLobbyLimitError(string title, string body)
     {
         return title.ToLower() == PhotonRoomErrorTitle && body.ToLower().Contains(PhotonLobbyLimitBodyPartial);
@@ -34,11 +34,12 @@ internal static class ModalPatches
             $"Photon lobby limit error detected. Setting temporary max player override to {lobbyLimit}. You may use a mod such as \"Self Sufficient\" to increase this limit.");
 
         PhotonLobbyLimitTracker.PlayerLimit = lobbyLimit;
-        
+
         body += $"\n\nThe lobby player limit will temporarily be set to {lobbyLimit} for the duration of this session.";
-        body += "\nYou may use a mod such as \"Self Sufficient\" to host your own Photon server with a higher player limit.";
+        body +=
+            "\nYou may use a mod such as \"Self Sufficient\" to host your own Photon server with a higher player limit.";
     }
-    
+
     /// <summary>
     ///     Prefix for the Show method in the Modal class.
     ///     Adds a "Cancel" option to prevent the player limit override.
@@ -49,11 +50,11 @@ internal static class ModalPatches
     {
         if (!IsPhotonLobbyLimitError(title, body))
             return;
-        
+
         var cancelOption = new ModalOption("Cancel", CancelPhotonLobbyLimitOverride);
         options = options.Append(cancelOption).ToArray();
     }
-    
+
     /// <summary>
     ///     Callback for the "Cancel" option in the Show method in the Modal class.
     ///     Resets the temporary max player override.

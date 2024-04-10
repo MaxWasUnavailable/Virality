@@ -1,5 +1,4 @@
 using HarmonyLib;
-using Steamworks;
 using Virality.Helpers;
 
 namespace Virality.Patches;

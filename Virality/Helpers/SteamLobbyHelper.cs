@@ -39,7 +39,7 @@ public static class SteamLobbyHelper
     {
         return LobbyHandler!.m_CurrentLobby;
     }
-    
+
     /// <summary>
     ///     Sets the maximum number of players allowed in the lobby.
     /// </summary>
@@ -48,7 +48,7 @@ public static class SteamLobbyHelper
     {
         LobbyHandler!.m_MaxPlayers = maxPlayers;
     }
-    
+
     /// <summary>
     ///     Sets the maximum number of players allowed in the lobby to the value from the Virality config.
     /// </summary>

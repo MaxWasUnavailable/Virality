@@ -9,7 +9,6 @@ websiteUrl = "https://github.com/MaxWasUnavailable/Virality"
 containsNsfwContent = false
 [package.dependencies]
 BepInEx-BepInExPack = "5.4.2100"
-Computery-Self_Sufficient = "3.2.0"
 
 [build]
 icon = "logo.png"
@@ -29,7 +28,7 @@ source = "../Virality/bin/Release/netstandard2.1/MaxWasUnavailable.Virality.dll"
 target = "/BepInEx/plugins/Virality/"
 
 [publish]
-communities = [ "content-warning", ]
+communities = ["content-warning", ]
 repository = "https://thunderstore.io"
 [publish.categories]
-content-warning = [ "bepinex", "mods", "clientside", "serverside" ]
+content-warning = ["bepinex", "mods", "clientside", "serverside"]

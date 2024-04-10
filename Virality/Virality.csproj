@@ -72,8 +72,8 @@
         <Reference Include="PhotonUnityNetworking" HintPath="$(CW_REFERENCES)\PhotonUnityNetworking.dll" Private="False" Publicize="true"/>
         <Reference Include="PhotonRealtime" HintPath="$(CW_REFERENCES)\PhotonRealtime.dll" Private="False" Publicize="true"/>
     </ItemGroup>
-    
-    <ItemGroup Condition="$(CI) == 'true'" >
+
+    <ItemGroup Condition="$(CI) == 'true'">
         <PackageReference Include="ContentWarning.GameLibs.Steam" Version="*" Publicize="true" Private="False" PrivateAssets="all"/>
     </ItemGroup>
 

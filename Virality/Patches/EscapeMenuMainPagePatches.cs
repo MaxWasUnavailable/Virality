@@ -20,7 +20,7 @@ internal static class EscapeMenuMainPagePatches
         __instance.inviteButton.gameObject.SetActive(showButton);
         return false;
     }
-    
+
     private static bool VanillaCheck()
     {
         return MainMenuHandler.SteamLobbyHandler != null && SurfaceNetworkHandler.Instance != null &&
