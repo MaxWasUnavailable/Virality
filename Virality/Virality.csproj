@@ -67,6 +67,7 @@
         <Reference Include="Assembly-CSharp-firstpass" HintPath="$(CW_REFERENCES)\Assembly-CSharp-firstpass.dll" Private="False" Publicize="true"/>
         <Reference Include="UnityEngine.UI" HintPath="$(CW_REFERENCES)\UnityEngine.UI.dll" Private="False" Publicize="true"/>
         <Reference Include="Zorro.UI.Runtime" HintPath="$(CW_REFERENCES)\Zorro.UI.Runtime.dll" Private="False" Publicize="true"/>
+        <Reference Include="Zorro.Core.Runtime" HintPath="$(CW_REFERENCES)\Zorro.Core.Runtime.dll" Private="False" Publicize="true"/>
         <Reference Include="Steamworks" HintPath="$(CW_REFERENCES)\com.rlabrecque.steamworks.net.dll" Private="False" Publicize="true"/>
         <Reference Include="PhotonUnityNetworking" HintPath="$(CW_REFERENCES)\PhotonUnityNetworking.dll" Private="False" Publicize="true"/>
         <Reference Include="PhotonRealtime" HintPath="$(CW_REFERENCES)\PhotonRealtime.dll" Private="False" Publicize="true"/>
