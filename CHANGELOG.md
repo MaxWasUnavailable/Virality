@@ -5,30 +5,46 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [1.1.0] - 10/04/2024
 
 ### Added
-- CI/CD pipeline
+
+- Added IsLateJoinAllowed property that keeps track of the current state of late joining
+- Enabled invite button when late joining is allowed or when vanilla allows it
+- ContentWarningPlugin attribute
+- Modal popup in case of Photon Lobby Limit error
+- Override for lobby size limit in case of Photon Lobby Limit error
 
 ### Fixed
 
+- Some more MasterClient checks to prevent potential issues
+- Target individual player instead of all players when performing late game join RPCs
+
 ### Changed
 
+- Common lobby functionality moved to helpers
+- Use lobby size limit override if set instead of Virality config limit
+
 ### Removed
+
+- Steam Rich Presence, since base game now handles this
 
 ## [1.0.2] - 02/04/2024
 
 ### Fixed
+
 - Added transpiler patch to fix new MainMenuHandler 4 player limit
 
 ## [1.0.0-pre.2] - 02/04/2024
 
 ### Changed
+
 - Changed default max lobby size from 10 to 12
 
 ## [1.0.0-pre.1] - 02/04/2024
 
 ### Added
+
 - Configurable max player limit
 - Late joining
 - Right click Steam join
