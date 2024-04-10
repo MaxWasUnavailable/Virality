@@ -10,7 +10,6 @@
 
 - Bigger lobby sizes (configurable limit)
 - Late joining (configurable on/off)
-- Right click Steam join (configurable on/off)
 
 ## Notes
 
