@@ -8,6 +8,7 @@ namespace Virality;
 /// <summary>
 ///     Main plugin class for Virality.
 /// </summary>
+[ContentWarningPlugin(PluginInfo.PLUGIN_GUID, PluginInfo.PLUGIN_NAME, false)]
 [BepInPlugin(PluginInfo.PLUGIN_GUID, PluginInfo.PLUGIN_NAME, PluginInfo.PLUGIN_VERSION)]
 public class Virality : BaseUnityPlugin
 {
