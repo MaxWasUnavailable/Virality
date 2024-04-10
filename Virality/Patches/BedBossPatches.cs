@@ -10,7 +10,7 @@ internal static class BedBossPatches
     ///     Prefix patch for the OnPlayerJoined method.
     ///     Disables the method to assign beds if there are more than 4 players.
     /// </summary>
-    /// <returns> Whether or not to run the original method. </returns>
+    /// <returns> Whether to run the original method. </returns>
     [HarmonyPrefix]
     [HarmonyPatch(nameof(BedBoss.OnPlayerJoined))]
     private static bool OnPlayerJoinedPrefix()
