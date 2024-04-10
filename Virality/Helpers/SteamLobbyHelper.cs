@@ -47,4 +47,21 @@ public static class SteamLobbyHelper
         SteamFriends.SetRichPresence("connect",
             $"steam://joinlobby/{GetAppId()}/{GetLobbyId()}/{GetUserId()}");
     }
+    
+    /// <summary>
+    ///     Sets the maximum number of players allowed in the lobby.
+    /// </summary>
+    /// <param name="maxPlayers"> The maximum number of players allowed in the lobby. </param>
+    public static void SetLobbyMaxPlayers(int maxPlayers)
+    {
+        LobbyHandler!.m_MaxPlayers = maxPlayers;
+    }
+    
+    /// <summary>
+    ///     Sets the maximum number of players allowed in the lobby to the value from the Virality config.
+    /// </summary>
+    public static void SetLobbyMaxToConfig()
+    {
+        SetLobbyMaxPlayers(Virality.MaxPlayers!.Value);
+    }
 }

@@ -1,3 +1,5 @@
+using Photon.Pun;
+
 namespace Virality.Helpers;
 
 /// <summary>
@@ -12,5 +14,19 @@ public static class PhotonLobbyHelper
     public static bool IsOnSurface()
     {
         return PhotonGameLobbyHandler.IsSurface;
+    }
+    
+    /// <summary>
+    ///     Sets the maximum number of players allowed in the lobby.
+    /// </summary>
+    /// <param name="maxPlayers"> The maximum number of players allowed in the lobby. </param>
+    public static void SetLobbyMaxPlayers(int maxPlayers)
+    {
+        PhotonNetwork.CurrentRoom.MaxPlayers = maxPlayers;
+    }
+    
+    public static void SetLobbyMaxToConfig()
+    {
+        SetLobbyMaxPlayers(Virality.MaxPlayers!.Value);
     }
 }
