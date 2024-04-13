@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+using System.Reflection.Emit;
 using HarmonyLib;
 using Virality.Helpers;
 
@@ -11,12 +14,28 @@ internal static class SteamLobbyHandlerPatches
     ///     Prefix patch for the HostMatch method.
     ///     Overrides the max players value with the one from the Virality config.
     /// </summary>
-    /// <param name="__instance"> Instance of the SteamLobbyHandler. </param>
     [HarmonyPrefix]
     [HarmonyPatch(nameof(SteamLobbyHandler.HostMatch))]
-    private static void HostMatchPrefix(ref SteamLobbyHandler __instance)
+    private static void HostMatchPrefix()
     {
-        SteamLobbyHelper.LobbyHandler = __instance;
         SteamLobbyHelper.SetLobbyMaxToConfig();
+    }
+    
+    /// <summary>
+    ///     Transpiler patch for the SteamLobbyHandler constructor.
+    ///     Replaces the max players value with the one from the Virality config.
+    /// </summary>
+    /// <param name="instructions"> Original instructions. </param>
+    /// <returns> Modified instructions. </returns>
+    [HarmonyTranspiler]
+    [HarmonyPatch(MethodType.Constructor, [typeof(Action<string, string, bool>), typeof(int), typeof(bool)])]
+    private static IEnumerable<CodeInstruction> ConstructorTranspiler(IEnumerable<CodeInstruction> instructions)
+    {
+        return new CodeMatcher(instructions)
+            .SearchForward(instruction => instruction.opcode == OpCodes.Ldarg_2)
+            .ThrowIfInvalid("Could not find max players argument")
+            .SetInstructionAndAdvance(new CodeInstruction(OpCodes.Call,
+                AccessTools.Method(typeof(LobbyHelper), nameof(LobbyHelper.GetLobbyMaxConfig))))
+            .InstructionEnumeration();
     }
 }
