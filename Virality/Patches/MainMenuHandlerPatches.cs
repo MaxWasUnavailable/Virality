@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Reflection.Emit;
 using HarmonyLib;
-using Virality.State;
+using Virality.Helpers;
 
 namespace Virality.Patches;
 
@@ -17,12 +17,7 @@ internal static class MainMenuHandlerPatches
             .SearchForward(instruction => instruction.opcode == OpCodes.Ldc_I4_4)
             .ThrowIfInvalid("Could not find max players constant")
             .SetInstructionAndAdvance(new CodeInstruction(OpCodes.Call,
-                AccessTools.Method(typeof(MainMenuHandlerPatches), nameof(GetMaxPlayers))))
+                AccessTools.Method(typeof(LobbyHelper), nameof(LobbyHelper.GetLobbyMaxConfig))))
             .InstructionEnumeration();
-    }
-
-    public static int GetMaxPlayers()
-    {
-        return PhotonLobbyLimitTracker.PlayerLimit ?? Virality.MaxPlayers!.Value;
     }
 }
