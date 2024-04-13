@@ -57,6 +57,15 @@ public static class SteamLobbyHelper
     /// </summary>
     public static void SetLobbyMaxToConfig()
     {
-        SetLobbyMaxPlayers(PhotonLobbyLimitTracker.PlayerLimit ?? Virality.MaxPlayers!.Value);
+        SetLobbyMaxPlayers(GetLobbyMaxConfig());
+    }
+
+    /// <summary>
+    ///     Gets the maximum number of players allowed in a new lobby from the Virality config or the PlayerLimit override.
+    /// </summary>
+    /// <returns> The maximum number of players allowed in a new lobby. </returns>
+    public static int GetLobbyMaxConfig()
+    {
+        return PhotonLobbyLimitTracker.PlayerLimit ?? Virality.MaxPlayers!.Value;
     }
 }
