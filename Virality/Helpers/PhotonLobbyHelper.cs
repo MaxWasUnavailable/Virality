@@ -31,7 +31,7 @@ public static class PhotonLobbyHelper
     /// </summary>
     public static void SetLobbyMaxToConfig()
     {
-        SetLobbyMaxPlayers(PhotonLobbyLimitTracker.PlayerLimit ?? Virality.MaxPlayers!.Value);
+        SetLobbyMaxPlayers(LobbyHelper.GetLobbyMaxConfig());
     }
 
     /// <summary>
