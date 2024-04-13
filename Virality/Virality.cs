@@ -42,7 +42,10 @@ public class Virality : BaseUnityPlugin
         PatchAll();
 
         // Report plugin loaded
-        Logger.LogInfo($"Plugin {PluginInfo.PLUGIN_GUID} is loaded!");
+        if (_isPatched)
+            Logger.LogInfo($"Plugin {PluginInfo.PLUGIN_GUID} is loaded!");
+        else
+            Logger.LogError($"Plugin {PluginInfo.PLUGIN_GUID} failed to load correctly!");
     }
 
     private void PatchAll()
