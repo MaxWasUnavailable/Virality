@@ -57,9 +57,15 @@ public class Virality : BaseUnityPlugin
 
         Harmony ??= new Harmony(PluginInfo.PLUGIN_GUID);
 
-        Harmony.PatchAll();
-        _isPatched = true;
-
-        Logger?.LogDebug("Patched!");
+        try
+        {
+            Harmony.PatchAll();
+            _isPatched = true;
+            Logger?.LogDebug("Patched!");
+        }
+        catch (System.Exception e)
+        {
+            Logger?.LogError($"Failed to patch: {e}");
+        }
     }
 }
