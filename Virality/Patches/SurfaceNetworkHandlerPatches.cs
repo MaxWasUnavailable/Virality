@@ -12,10 +12,9 @@ internal static class SurfaceNetworkHandlerPatches
     ///     Postfix patch for the RPCM_StartGame method.
     ///     Allows late joining if enabled.
     /// </summary>
-    /// <param name="__instance"> Instance of the SurfaceNetworkHandler. </param>
     [HarmonyPostfix]
     [HarmonyPatch(nameof(SurfaceNetworkHandler.RPCM_StartGame))]
-    private static void RPCM_StartGamePostfix(ref SurfaceNetworkHandler __instance)
+    private static void RPCM_StartGamePostfix()
     {
         if (!PhotonLobbyHelper.IsMasterClient())
             return;
@@ -34,10 +33,9 @@ internal static class SurfaceNetworkHandlerPatches
     ///     Postfix patch for the OnSlept method.
     ///     Re-enables late joining if enabled.
     /// </summary>
-    /// <param name="__instance"> Instance of the SurfaceNetworkHandler. </param>
     [HarmonyPostfix]
     [HarmonyPatch(nameof(SurfaceNetworkHandler.OnSlept))]
-    private static void OnSleptPostfix(ref SurfaceNetworkHandler __instance)
+    private static void OnSleptPostfix()
     {
         if (!PhotonLobbyHelper.IsMasterClient())
             return;
