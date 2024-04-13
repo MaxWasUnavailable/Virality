@@ -1,6 +1,8 @@
 using Steamworks;
 using Virality.State;
 
+// ReSharper disable MemberCanBePrivate.Global
+
 namespace Virality.Helpers;
 
 /// <summary>
@@ -46,6 +48,7 @@ public static class SteamLobbyHelper
     /// <param name="maxPlayers"> The maximum number of players allowed in the lobby. </param>
     public static void SetLobbyMaxPlayers(int maxPlayers)
     {
+        Virality.Logger?.LogInfo($"Setting lobby max players to {maxPlayers}.");
         LobbyHandler!.m_MaxPlayers = maxPlayers;
     }
 
