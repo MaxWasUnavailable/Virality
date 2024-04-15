@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Patch max player count on SteamLobbyHandler constructor
+- Config toggle for the voice app id override
 
 ### Fixed
 
