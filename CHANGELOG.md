@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.0] - 15/04/2024
+
+### Added
+
+- Patch max player count on SteamLobbyHandler constructor
+- Set Photon voice app id to the realtime app id (attempt to fix voice issues)
+
+### Fixed
+
+### Changed
+
+- Use base game static MainMenuHandler.SteamLobbyHandler instead of saving it on lobby creation
+
+### Removed
+
 ## [1.1.0] - 10/04/2024
 
 ### Added
