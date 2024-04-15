@@ -10,9 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Patch max player count on SteamLobbyHandler constructor
-- Set Photon voice app id to the realtime app id (attempt to fix voice issues)
 
 ### Fixed
+
+- Set Photon voice app id to the realtime app id (attempt to fix voice issues)
 
 ### Changed
 
