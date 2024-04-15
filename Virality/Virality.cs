@@ -1,7 +1,9 @@
-﻿using BepInEx;
+﻿using System;
+using BepInEx;
 using BepInEx.Configuration;
 using BepInEx.Logging;
 using HarmonyLib;
+using Photon.Pun;
 
 namespace Virality;
 
@@ -17,6 +19,7 @@ public class Virality : BaseUnityPlugin
     internal new static ManualLogSource? Logger { get; private set; }
     internal static ConfigEntry<int>? MaxPlayers { get; private set; }
     internal static ConfigEntry<bool>? AllowLateJoin { get; private set; }
+    internal static ConfigEntry<bool>? EnableVoiceFix { get; private set; }
 
     /// <summary>
     ///     Singleton instance of the plugin.
@@ -38,8 +41,15 @@ public class Virality : BaseUnityPlugin
         AllowLateJoin = Config.Bind("General", "AllowLateJoin", true,
             "Whether or not to allow players to join your lobby after the game has started.");
 
+        EnableVoiceFix = Config.Bind("General", "EnableVoiceFix", true,
+            "Whether or not to enable the voice fix.");
+
         // Patch using Harmony
         PatchAll();
+
+        // Override voice server app id
+        if (EnableVoiceFix.Value)
+            OverrideVoiceServerAppId();
 
         // Report plugin loaded
         if (_isPatched)
@@ -66,9 +76,21 @@ public class Virality : BaseUnityPlugin
             _isPatched = true;
             Logger?.LogDebug("Patched!");
         }
-        catch (System.Exception e)
+        catch (Exception e)
         {
             Logger?.LogError($"Failed to patch: {e}");
         }
+    }
+
+    /// <summary>
+    ///     Overrides the voice server app id with the realtime server app id, in order to fix voice issues.
+    /// </summary>
+    private static void OverrideVoiceServerAppId()
+    {
+        PhotonNetwork.PhotonServerSettings.AppSettings.AppIdVoice =
+            PhotonNetwork.PhotonServerSettings.AppSettings.AppIdRealtime;
+
+        Logger?.LogDebug(
+            $"Voice server app id set to realtime server app id ({PhotonNetwork.PhotonServerSettings.AppSettings.AppIdVoice})");
     }
 }

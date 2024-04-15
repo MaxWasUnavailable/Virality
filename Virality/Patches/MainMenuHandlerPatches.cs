@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Reflection.Emit;
 using HarmonyLib;
-using Photon.Pun;
 using Virality.Helpers;
 
 namespace Virality.Patches;
@@ -24,20 +23,5 @@ internal static class MainMenuHandlerPatches
             .SetInstructionAndAdvance(new CodeInstruction(OpCodes.Call,
                 AccessTools.Method(typeof(LobbyHelper), nameof(LobbyHelper.GetLobbyMaxConfig))))
             .InstructionEnumeration();
-    }
-
-    /// <summary>
-    ///     Prefix patch for the ConnectToPhoton method.
-    ///     Overrides the voice server app id with the realtime server app id, in order to fix voice issues.
-    /// </summary>
-    [HarmonyPrefix]
-    [HarmonyPatch(nameof(MainMenuHandler.ConnectToPhoton))]
-    private static void ConnectToPhotonPrefix()
-    {
-        PhotonNetwork.PhotonServerSettings.AppSettings.AppIdVoice =
-            PhotonNetwork.PhotonServerSettings.AppSettings.AppIdRealtime;
-
-        Virality.Logger?.LogDebug(
-            $"Voice server app id set to realtime server app id ({PhotonNetwork.PhotonServerSettings.AppSettings.AppIdVoice})");
     }
 }
