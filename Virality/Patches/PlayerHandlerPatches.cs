@@ -17,16 +17,16 @@ internal static class PlayerHandlerPatches
     [HarmonyPatch(nameof(PlayerHandler.AddPlayer))]
     private static void AddPlayerPostfixOpenDoor(Player player)
     {
+        if (!PhotonLobbyHelper.IsMasterClient())
+            return;
+        
+        if (player.IsLocal)
+            return;
+        
         if (!Virality.AllowLateJoin!.Value)
             return;
 
         if (!DoorOpenTracker.IsDoorOpen || !PhotonLobbyHelper.IsOnSurface())
-            return;
-
-        if (!PhotonLobbyHelper.IsMasterClient())
-            return;
-
-        if (player.IsLocal)
             return;
 
         SendDoorOpenRPC(player);
