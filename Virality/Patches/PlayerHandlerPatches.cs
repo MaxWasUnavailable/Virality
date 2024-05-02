@@ -82,11 +82,11 @@ internal static class PlayerHandlerPatches
     private static void AllPlayersInBedPostfix(PlayerHandler __instance, ref bool __result)
     {
         var numberInBed = 0;
-        for (var i = 0; i < __instance.playerAlive.Count; i++)
-            if (__instance.playerAlive[i].data.bed != null)
+        for (var i = 0; i < __instance.playersAlive.Count; i++)
+            if (__instance.playersAlive[i].data.currentBed != null)
                 numberInBed++;
 
-        __result = numberInBed >= Math.Min(__instance.playerAlive.Count, 4);
+        __result = numberInBed >= Math.Min(__instance.playersAlive.Count, 4);
     }
 
     /// <summary>
@@ -99,10 +99,10 @@ internal static class PlayerHandlerPatches
     private static void AllPlayersAsleepPostfix(PlayerHandler __instance, ref bool __result)
     {
         var numberAsleep = 0;
-        for (var i = 0; i < __instance.playerAlive.Count; i++)
-            if (__instance.playerAlive[i].data.sleepAmount >= 0.9f)
+        for (var i = 0; i < __instance.playersAlive.Count; i++)
+            if (__instance.playersAlive[i].data.sleepAmount >= 0.9f)
                 numberAsleep++;
 
-        __result = numberAsleep >= Math.Min(__instance.playerAlive.Count, 4);
+        __result = numberAsleep >= Math.Min(__instance.playersAlive.Count, 4);
     }
 }
