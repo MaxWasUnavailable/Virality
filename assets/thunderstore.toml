@@ -31,5 +31,4 @@ target = "/BepInEx/plugins/Virality/"
 communities = ["content-warning", ]
 repository = "https://thunderstore.io"
 [publish.categories]
-#content-warning = ["bepinex", "mods", "clientside", "serverside"]
-content-warning = ["mods"]
+content-warning = ["bepinex", "mods"]
