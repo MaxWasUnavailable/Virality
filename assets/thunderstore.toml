@@ -4,7 +4,7 @@ schemaVersion = "0.0.1"
 [package]
 namespace = "MaxWasUnavailable"
 name = "Virality"
-description = "Extends the max number of players that can play in a lobby, adds late joining, and proper Steam rich presence."
+description = "Extends the max number of players that can play in a lobby, and adds late joining!"
 websiteUrl = "https://github.com/MaxWasUnavailable/Virality"
 containsNsfwContent = false
 [package.dependencies]
