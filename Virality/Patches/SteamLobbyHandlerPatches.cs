@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Reflection.Emit;
 using HarmonyLib;
@@ -28,11 +27,11 @@ internal static class SteamLobbyHandlerPatches
     /// <param name="instructions"> Original instructions. </param>
     /// <returns> Modified instructions. </returns>
     [HarmonyTranspiler]
-    [HarmonyPatch(MethodType.Constructor, [typeof(Action<string, string, bool>), typeof(int), typeof(bool)])]
+    [HarmonyPatch(MethodType.Constructor, [typeof(int), typeof(bool)])]
     private static IEnumerable<CodeInstruction> ConstructorTranspiler(IEnumerable<CodeInstruction> instructions)
     {
         return new CodeMatcher(instructions)
-            .SearchForward(instruction => instruction.opcode == OpCodes.Ldarg_2)
+            .SearchForward(instruction => instruction.opcode == OpCodes.Ldarg_1)
             .ThrowIfInvalid("Could not find max players argument")
             .SetInstructionAndAdvance(new CodeInstruction(OpCodes.Call,
                 AccessTools.Method(typeof(LobbyHelper), nameof(LobbyHelper.GetLobbyMaxConfig))))
