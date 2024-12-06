@@ -49,6 +49,7 @@
 
     <!-- BepInEx Package References -->
     <ItemGroup>
+        <PackageReference Include="Lib.Harmony" Version="2.3.3" />
         <PackageReference Include="BepInEx.PluginInfoProps" Version="1.*"/>
         <PackageReference Include="UnityEngine.Modules" Version="2022.3.10" IncludeAssets="compile"/>
         <PackageReference Include="BepInEx.AssemblyPublicizer.MSBuild" Version="0.4.1" PrivateAssets="all" ExcludeAssets="runtime"/>
@@ -61,7 +62,7 @@
 
     <!-- IDE Assemblies - Easier to Find Source Code -->
     <ItemGroup Condition="$(CI) != 'true'">
-        <Reference Include="Harmony" HintPath="$(CW_REFERENCES)\0Harmony.dll" Private="False" Publicize="true"/>
+<!--        <Reference Include="Harmony" HintPath="$(CW_REFERENCES)\0Harmony.dll" Private="False" Publicize="true"/>-->
         <Reference Include="Assembly-CSharp" HintPath="$(CW_REFERENCES)\Assembly-CSharp.dll" Private="False" Publicize="true"/>
         <Reference Include="Assembly-CSharp-firstpass" HintPath="$(CW_REFERENCES)\Assembly-CSharp-firstpass.dll" Private="False" Publicize="true"/>
         <Reference Include="UnityEngine.UI" HintPath="$(CW_REFERENCES)\UnityEngine.UI.dll" Private="False" Publicize="true"/>
