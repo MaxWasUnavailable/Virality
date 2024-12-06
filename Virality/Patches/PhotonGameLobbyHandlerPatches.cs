@@ -18,7 +18,7 @@ internal static class PhotonGameLobbyHandlerPatches
         if (!PhotonLobbyHelper.IsMasterClient())
             return;
 
-        if (!Virality.AllowLateJoin!.Value)
+        if (!Virality.AllowLateJoin)
             return;
 
         if (PhotonLobbyHelper.IsOnSurface())

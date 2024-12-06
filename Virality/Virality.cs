@@ -1,9 +1,9 @@
 ﻿using System;
-using BepInEx;
-using BepInEx.Configuration;
-using BepInEx.Logging;
 using HarmonyLib;
 using Photon.Pun;
+using Unity.Mathematics;
+using Virality.Core;
+using Zorro.Settings;
 
 namespace Virality;
 
@@ -11,44 +11,20 @@ namespace Virality;
 ///     Main plugin class for Virality.
 /// </summary>
 [ContentWarningPlugin(PluginInfo.PLUGIN_GUID, PluginInfo.PLUGIN_VERSION, false)]
-[BepInPlugin(PluginInfo.PLUGIN_GUID, PluginInfo.PLUGIN_NAME, PluginInfo.PLUGIN_VERSION)]
-public class Virality : BaseUnityPlugin
+public class Virality
 {
-    private bool _isPatched;
-    private Harmony? Harmony { get; set; }
-    internal new static ManualLogSource? Logger { get; private set; }
-    internal static ConfigEntry<int>? MaxPlayers { get; private set; }
-    internal static ConfigEntry<bool>? AllowLateJoin { get; private set; }
-    internal static ConfigEntry<bool>? EnableVoiceFix { get; private set; }
+    private static bool _isPatched;
 
-    /// <summary>
-    ///     Singleton instance of the plugin.
-    /// </summary>
-    public static Virality? Instance { get; private set; }
-
-    private void Awake()
+    static Virality()
     {
-        // Set instance
-        Instance = this;
-
         // Init logger
-        Logger = base.Logger;
-
-        // Init config entries
-        MaxPlayers = Config.Bind("General", "MaxPlayers", 12,
-            "The maximum number of players allowed in your lobby.");
-
-        AllowLateJoin = Config.Bind("General", "AllowLateJoin", true,
-            "Whether or not to allow players to join your lobby after the game has started.");
-
-        EnableVoiceFix = Config.Bind("General", "EnableVoiceFix", true,
-            "Whether or not to enable the voice fix.");
+        Logger = new Logger();
 
         // Patch using Harmony
         PatchAll();
 
         // Override voice server app id
-        if (EnableVoiceFix.Value)
+        if (EnableVoiceFix)
             OverrideVoiceServerAppId();
 
         // Report plugin loaded
@@ -58,7 +34,13 @@ public class Virality : BaseUnityPlugin
             Logger.LogError($"Plugin {PluginInfo.PLUGIN_GUID} failed to load correctly!");
     }
 
-    private void PatchAll()
+    private static Harmony? Harmony { get; set; }
+    internal static Logger? Logger { get; }
+    internal static int MaxPlayers { get; private set; } = 12;
+    internal static bool AllowLateJoin { get; private set; } = true;
+    internal static bool EnableVoiceFix { get; private set; } = true;
+
+    private static void PatchAll()
     {
         if (_isPatched)
         {
@@ -92,5 +74,107 @@ public class Virality : BaseUnityPlugin
 
         Logger?.LogDebug(
             $"Voice server app id set to realtime server app id ({PhotonNetwork.PhotonServerSettings.AppSettings.AppIdVoice})");
+    }
+
+    [ContentWarningSetting] // TODO: Turn into IntSetting when available
+    public class MaxPlayersSetting : FloatSetting, IExposedSetting
+    {
+        public SettingCategory GetSettingCategory()
+        {
+            return SettingCategory.Mods;
+        }
+
+        public string GetDisplayName()
+        {
+            return "Max Players";
+        }
+
+        public override void ApplyValue()
+        {
+            MaxPlayers = (int)Value;
+        }
+
+        public override float GetDefaultValue()
+        {
+            return 12;
+        }
+
+        public override float2 GetMinMaxValue()
+        {
+            return new float2(1, 100);
+        }
+
+        public string GetDescription()
+        {
+            return "The maximum number of players allowed in your lobby.";
+        }
+    }
+
+    [ContentWarningSetting]
+    public class LateJoinSetting : FloatSetting, IExposedSetting
+    {
+        public SettingCategory GetSettingCategory()
+        {
+            return SettingCategory.Mods;
+        }
+
+        public string GetDisplayName()
+        {
+            return "Allow Late Join";
+        }
+
+        public override void ApplyValue()
+        {
+            AllowLateJoin = Value > 0;
+        }
+
+        public override float GetDefaultValue()
+        {
+            return 1;
+        }
+
+        public override float2 GetMinMaxValue()
+        {
+            return new float2(0, 1);
+        }
+
+        public string GetDescription()
+        {
+            return "Whether or not to allow players to join your lobby after the game has started.";
+        }
+    }
+
+    [ContentWarningSetting]
+    public class VoiceFixSetting : FloatSetting, IExposedSetting
+    {
+        public SettingCategory GetSettingCategory()
+        {
+            return SettingCategory.Mods;
+        }
+
+        public string GetDisplayName()
+        {
+            return "Enable Voice Fix";
+        }
+
+        public override void ApplyValue()
+        {
+            EnableVoiceFix = Value > 0;
+        }
+
+        public override float GetDefaultValue()
+        {
+            return 1;
+        }
+
+        public override float2 GetMinMaxValue()
+        {
+            return new float2(0, 1);
+        }
+
+        public string GetDescription()
+        {
+            return "Whether or not to enable the voice fix.";
+        }
     }
 }

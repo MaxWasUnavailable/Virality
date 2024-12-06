@@ -23,7 +23,7 @@ internal static class PlayerHandlerPatches
         if (player.IsLocal)
             return;
         
-        if (!Virality.AllowLateJoin!.Value)
+        if (!Virality.AllowLateJoin)
             return;
 
         if (!DoorOpenTracker.IsDoorOpen || !PhotonLobbyHelper.IsOnSurface())
@@ -43,7 +43,7 @@ internal static class PlayerHandlerPatches
         if (!PhotonLobbyHelper.IsMasterClient())
             return;
 
-        if (!Virality.AllowLateJoin!.Value)
+        if (!Virality.AllowLateJoin)
             return;
 
         SyncObjectiveRPC(player);

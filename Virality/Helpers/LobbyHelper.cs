@@ -13,6 +13,6 @@ public static class LobbyHelper
     /// <returns> The maximum number of players allowed in a new lobby. </returns>
     public static int GetLobbyMaxConfig()
     {
-        return PhotonLobbyLimitTracker.PlayerLimit ?? Virality.MaxPlayers!.Value;
+        return PhotonLobbyLimitTracker.PlayerLimit ?? Virality.MaxPlayers;
     }
 }

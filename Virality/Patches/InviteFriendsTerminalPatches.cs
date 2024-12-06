@@ -34,7 +34,7 @@ internal static class InviteFriendsTerminalPatches
     [HarmonyPatch(nameof(InviteFriendsTerminal.IsGameStarted), MethodType.Getter)]
     private static bool IsGameStartedPrefix(ref bool __result)
     {
-        if (!Virality.AllowLateJoin!.Value)
+        if (!Virality.AllowLateJoin)
             return true;
 
         __result = false;

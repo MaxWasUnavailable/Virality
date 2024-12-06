@@ -19,7 +19,7 @@ internal static class SurfaceNetworkHandlerPatches
         if (!PhotonLobbyHelper.IsMasterClient())
             return;
 
-        if (!Virality.AllowLateJoin!.Value)
+        if (!Virality.AllowLateJoin)
             return;
 
         if (!PhotonLobbyHelper.IsOnSurface())
@@ -40,7 +40,7 @@ internal static class SurfaceNetworkHandlerPatches
         if (!PhotonLobbyHelper.IsMasterClient())
             return;
 
-        if (!Virality.AllowLateJoin!.Value)
+        if (!Virality.AllowLateJoin)
             return;
 
         LateJoinHelper.EnableLateJoin();
