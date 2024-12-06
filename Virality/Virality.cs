@@ -76,6 +76,8 @@ public class Virality
             $"Voice server app id set to realtime server app id ({PhotonNetwork.PhotonServerSettings.AppSettings.AppIdVoice})");
     }
 
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+
     [ContentWarningSetting] // TODO: Turn into IntSetting when available
     public class MaxPlayersSetting : FloatSetting, IExposedSetting
     {
@@ -177,4 +179,5 @@ public class Virality
             return "Whether or not to enable the voice fix.";
         }
     }
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
 }
