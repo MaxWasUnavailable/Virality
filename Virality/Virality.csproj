@@ -78,7 +78,6 @@
     </ItemGroup>
 
     <ItemGroup Condition="$(CI) == 'true'">
-        <PackageReference Include="Lib.Harmony" Version="2.3.3" />
         <PackageReference Include="ContentWarning.GameLibs.Steam" Version="0.1.11-a-ngd.0" Publicize="true" Private="False" PrivateAssets="all"/>
     </ItemGroup>
 
