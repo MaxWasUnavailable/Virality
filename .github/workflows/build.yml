@@ -5,9 +5,9 @@ name: .NET
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "master", "feature/bepinex"]
   pull_request:
-    branches: [ "master" ]
+    branches: [ "master", "feature/bepinex"]
 
 jobs:
   build:

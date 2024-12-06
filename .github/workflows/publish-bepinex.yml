@@ -3,6 +3,7 @@
 on:
   release:
     types: [ released, prereleased ]
+    branches: [ "release/bepinex" ]
 
 jobs:
   build:
