@@ -13,13 +13,21 @@ namespace Virality;
 [ContentWarningPlugin(PluginInfo.PLUGIN_GUID, PluginInfo.PLUGIN_VERSION, false)]
 public class Virality
 {
-    private static bool _isPatched;
+    private bool _isPatched;
 
     static Virality()
     {
         // Init logger
         Logger = new Logger();
 
+        Instance = new Virality();
+    }
+
+    /// <summary>
+    ///     Constructor for the Virality plugin.
+    /// </summary>
+    public Virality()
+    {
         // Patch using Harmony
         PatchAll();
 
@@ -29,18 +37,23 @@ public class Virality
 
         // Report plugin loaded
         if (_isPatched)
-            Logger.LogInfo($"Plugin {PluginInfo.PLUGIN_GUID} is loaded!");
+            Logger?.LogInfo($"Plugin {PluginInfo.PLUGIN_GUID} is loaded!");
         else
-            Logger.LogError($"Plugin {PluginInfo.PLUGIN_GUID} failed to load correctly!");
+            Logger?.LogError($"Plugin {PluginInfo.PLUGIN_GUID} failed to load correctly!");
     }
 
-    private static Harmony? Harmony { get; set; }
+    private Harmony? Harmony { get; set; }
     internal static Logger? Logger { get; }
     internal static int MaxPlayers { get; private set; } = 12;
     internal static bool AllowLateJoin { get; private set; } = true;
     internal static bool EnableVoiceFix { get; private set; } = true;
 
-    private static void PatchAll()
+    /// <summary>
+    ///     Singleton instance of the Virality plugin.
+    /// </summary>
+    public static Virality Instance { get; private set; }
+
+    private void PatchAll()
     {
         if (_isPatched)
         {
