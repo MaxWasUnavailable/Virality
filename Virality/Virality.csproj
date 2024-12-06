@@ -63,17 +63,22 @@
 
     <!-- IDE Assemblies - Easier to Find Source Code -->
     <ItemGroup Condition="$(CI) != 'true'">
+        <Reference Include="Harmony" HintPath="$(CW_REFERENCES)\0Harmony.dll" Private="False" Publicize="true"/>
         <Reference Include="Assembly-CSharp" HintPath="$(CW_REFERENCES)\Assembly-CSharp.dll" Private="False" Publicize="true"/>
         <Reference Include="Assembly-CSharp-firstpass" HintPath="$(CW_REFERENCES)\Assembly-CSharp-firstpass.dll" Private="False" Publicize="true"/>
         <Reference Include="UnityEngine.UI" HintPath="$(CW_REFERENCES)\UnityEngine.UI.dll" Private="False" Publicize="true"/>
         <Reference Include="Zorro.UI.Runtime" HintPath="$(CW_REFERENCES)\Zorro.UI.Runtime.dll" Private="False" Publicize="true"/>
         <Reference Include="Zorro.Core.Runtime" HintPath="$(CW_REFERENCES)\Zorro.Core.Runtime.dll" Private="False" Publicize="true"/>
+        <Reference Include="Zoro.Settings.Runtime" HintPath="$(CW_REFERENCES)\Zorro.Settings.Runtime.dll" Private="False" Publicize="true"/>
+        <Reference Include="ModalAssembly" HintPath="$(CW_REFERENCES)\ModalAssembly.dll" Private="False" Publicize="true"/>
         <Reference Include="Steamworks" HintPath="$(CW_REFERENCES)\com.rlabrecque.steamworks.net.dll" Private="False" Publicize="true"/>
         <Reference Include="PhotonUnityNetworking" HintPath="$(CW_REFERENCES)\PhotonUnityNetworking.dll" Private="False" Publicize="true"/>
         <Reference Include="PhotonRealtime" HintPath="$(CW_REFERENCES)\PhotonRealtime.dll" Private="False" Publicize="true"/>
+        <Reference Include="Unity.Mathematics" HintPath="$(CW_REFERENCES)\Unity.Mathematics.dll" Private="False" Publicize="true"/>
     </ItemGroup>
 
     <ItemGroup Condition="$(CI) == 'true'">
+        <PackageReference Include="Lib.Harmony" Version="2.3.3" />
         <PackageReference Include="ContentWarning.GameLibs.Steam" Version="0.1.11-a-ngd.0" Publicize="true" Private="False" PrivateAssets="all"/>
     </ItemGroup>
 
