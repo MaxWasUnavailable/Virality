@@ -20,6 +20,10 @@ public class Virality
         // Init logger
         Logger = new Logger();
 
+        // Unpatch all to avoid conflicts in case of hot reload
+        Instance?.UnpatchAll();
+
+        // Create new instance
         Instance = new Virality();
     }
 
@@ -51,7 +55,7 @@ public class Virality
     /// <summary>
     ///     Singleton instance of the Virality plugin.
     /// </summary>
-    public static Virality Instance { get; private set; }
+    public static Virality Instance { get; }
 
     private void PatchAll()
     {
@@ -74,6 +78,28 @@ public class Virality
         catch (Exception e)
         {
             Logger?.LogError($"Failed to patch: {e}");
+        }
+    }
+
+    public void UnpatchAll()
+    {
+        if (!_isPatched)
+        {
+            Logger?.LogWarning("Already unpatched!");
+            return;
+        }
+
+        Logger?.LogDebug("Unpatching...");
+
+        try
+        {
+            Harmony?.UnpatchAll(PluginInfo.PLUGIN_GUID);
+            _isPatched = false;
+            Logger?.LogDebug("Unpatched!");
+        }
+        catch (Exception e)
+        {
+            Logger?.LogError($"Failed to unpatch: {e}");
         }
     }
 
