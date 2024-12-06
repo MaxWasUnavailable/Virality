@@ -112,7 +112,7 @@ public class Virality
         }
     }
 
-    [ContentWarningSetting]
+    [ContentWarningSetting] // TODO: Turn into BoolSetting when available
     public class LateJoinSetting : FloatSetting, IExposedSetting
     {
         public SettingCategory GetSettingCategory()
@@ -146,7 +146,7 @@ public class Virality
         }
     }
 
-    [ContentWarningSetting]
+    [ContentWarningSetting] // TODO: Turn into BoolSetting when available
     public class VoiceFixSetting : FloatSetting, IExposedSetting
     {
         public SettingCategory GetSettingCategory()
