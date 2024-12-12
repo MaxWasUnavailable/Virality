@@ -117,8 +117,8 @@ public class Virality
 
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 
-    [ContentWarningSetting] // TODO: Turn into IntSetting when available
-    public class MaxPlayersSetting : FloatSetting, IExposedSetting
+    [ContentWarningSetting]
+    public class MaxPlayersSetting : IntSetting, IExposedSetting
     {
         public SettingCategory GetSettingCategory()
         {
@@ -132,17 +132,17 @@ public class Virality
 
         public override void ApplyValue()
         {
-            MaxPlayers = (int)Value;
+            MaxPlayers = ValidateValue(Value);
         }
 
-        public override float GetDefaultValue()
+        public override int GetDefaultValue()
         {
             return 12;
         }
 
-        public override float2 GetMinMaxValue()
+        private static int ValidateValue(int value)
         {
-            return new float2(1, 100);
+            return math.clamp(value, 1, 100);
         }
 
         public string GetDescription()
@@ -151,8 +151,8 @@ public class Virality
         }
     }
 
-    [ContentWarningSetting] // TODO: Turn into BoolSetting when available
-    public class LateJoinSetting : FloatSetting, IExposedSetting
+    [ContentWarningSetting]
+    public class LateJoinSetting : BoolSetting, IExposedSetting
     {
         public SettingCategory GetSettingCategory()
         {
@@ -166,17 +166,12 @@ public class Virality
 
         public override void ApplyValue()
         {
-            AllowLateJoin = Value > 0;
+            AllowLateJoin = Value;
         }
 
-        public override float GetDefaultValue()
+        public override bool GetDefaultValue()
         {
-            return 1;
-        }
-
-        public override float2 GetMinMaxValue()
-        {
-            return new float2(0, 1);
+            return true;
         }
 
         public string GetDescription()
@@ -186,7 +181,7 @@ public class Virality
     }
 
     [ContentWarningSetting] // TODO: Turn into BoolSetting when available
-    public class VoiceFixSetting : FloatSetting, IExposedSetting
+    public class VoiceFixSetting : BoolSetting, IExposedSetting
     {
         public SettingCategory GetSettingCategory()
         {
@@ -200,17 +195,12 @@ public class Virality
 
         public override void ApplyValue()
         {
-            EnableVoiceFix = Value > 0;
+            EnableVoiceFix = Value;
         }
 
-        public override float GetDefaultValue()
+        public override bool GetDefaultValue()
         {
-            return 1;
-        }
-
-        public override float2 GetMinMaxValue()
-        {
-            return new float2(0, 1);
+            return true;
         }
 
         public string GetDescription()
