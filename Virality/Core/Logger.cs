@@ -7,13 +7,15 @@ namespace Virality.Core;
 /// </summary>
 public class Logger
 {
+    private string MessageFormat(string message) => $"[{PluginInfo.PluginGuid}:{PluginInfo.PluginVersion}] " + message;
+    
     /// <summary>
     ///     Log a debug message.
     /// </summary>
     /// <param name="message"></param>
     public void LogDebug(string message)
     {
-        Debug.Log(message);
+        Debug.Log(MessageFormat(message));
     }
 
     /// <summary>
@@ -22,7 +24,7 @@ public class Logger
     /// <param name="message"></param>
     public void LogInfo(string message)
     {
-        Debug.Log(message);
+        Debug.Log(MessageFormat(message));
     }
 
     /// <summary>
@@ -31,7 +33,7 @@ public class Logger
     /// <param name="message"></param>
     public void LogWarning(string message)
     {
-        Debug.LogWarning(message);
+        Debug.LogWarning(MessageFormat(message));
     }
 
     /// <summary>
@@ -40,6 +42,6 @@ public class Logger
     /// <param name="message"></param>
     public void LogError(string message)
     {
-        Debug.LogError(message);
+        Debug.LogError(MessageFormat(message));
     }
 }
