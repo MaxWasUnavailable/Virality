@@ -30,12 +30,6 @@ jobs:
       - name: Pack Solution
         run: |
           dotnet pack --configuration Release
-
-      - name: Upload NuPkg Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: nupkg-build
-          path: Virality/bin/Release/*.nupkg
           
   upload-release-artifacts:
     needs: build
@@ -50,4 +44,4 @@ jobs:
       - name: Upload artifacts to Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh release upload ${{ github.event.release.tag_name }} thunderstore-build/*.zip nupkg-build/*.nupkg
+        run: gh release upload ${{ github.event.release.tag_name }} steam-build/*.zip nupkg-build/*.nupkg
