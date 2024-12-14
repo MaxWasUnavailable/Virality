@@ -19,10 +19,10 @@ internal static class PlayerHandlerPatches
     {
         if (!PhotonLobbyHelper.IsMasterClient())
             return;
-        
+
         if (player.IsLocal)
             return;
-        
+
         if (!Virality.AllowLateJoin)
             return;
 
@@ -83,7 +83,7 @@ internal static class PlayerHandlerPatches
     {
         var numberInBed = 0;
         for (var i = 0; i < __instance.playersAlive.Count; i++)
-            if (__instance.playersAlive[i].data.currentBed != null)
+            if (__instance.playersAlive.ToArray()[i].data.currentBed != null)
                 numberInBed++;
 
         __result = numberInBed >= Math.Min(__instance.playersAlive.Count, 4);
@@ -100,7 +100,7 @@ internal static class PlayerHandlerPatches
     {
         var numberAsleep = 0;
         for (var i = 0; i < __instance.playersAlive.Count; i++)
-            if (__instance.playersAlive[i].data.sleepAmount >= 0.9f)
+            if (__instance.playersAlive.ToArray()[i].data.sleepAmount >= 0.9f)
                 numberAsleep++;
 
         __result = numberAsleep >= Math.Min(__instance.playersAlive.Count, 4);

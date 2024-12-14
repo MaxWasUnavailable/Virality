@@ -8,9 +8,24 @@ using Zorro.Settings;
 namespace Virality;
 
 /// <summary>
+///    Information about the plugin.
+/// </summary>
+public static class PluginInfo
+{
+    /// <summary>
+    ///     The GUID of the plugin.
+    /// </summary>
+    public const string PluginGuid = "MaxWasUnavailable.Virality";
+    /// <summary>
+    ///    The version of the plugin.
+    /// </summary>
+    public const string PluginVersion = "1.5.0";
+}
+
+/// <summary>
 ///     Main plugin class for Virality.
 /// </summary>
-[ContentWarningPlugin(PluginInfo.PLUGIN_GUID, PluginInfo.PLUGIN_VERSION, false)]
+[ContentWarningPlugin(PluginInfo.PluginGuid, PluginInfo.PluginVersion, false)]
 public class Virality
 {
     private bool _isPatched;
@@ -41,9 +56,9 @@ public class Virality
 
         // Report plugin loaded
         if (_isPatched)
-            Logger?.LogInfo($"Plugin {PluginInfo.PLUGIN_GUID} is loaded!");
+            Logger?.LogInfo($"Plugin {PluginInfo.PluginGuid} is loaded!");
         else
-            Logger?.LogError($"Plugin {PluginInfo.PLUGIN_GUID} failed to load correctly!");
+            Logger?.LogError($"Plugin {PluginInfo.PluginGuid} failed to load correctly!");
     }
 
     private Harmony? Harmony { get; set; }
@@ -67,7 +82,7 @@ public class Virality
 
         Logger?.LogDebug("Patching...");
 
-        Harmony ??= new Harmony(PluginInfo.PLUGIN_GUID);
+        Harmony ??= new Harmony(PluginInfo.PluginGuid);
 
         try
         {
@@ -81,6 +96,9 @@ public class Virality
         }
     }
 
+    /// <summary>
+    ///     Unpatches all patches applied by the plugin.
+    /// </summary>
     public void UnpatchAll()
     {
         if (!_isPatched)
