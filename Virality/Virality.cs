@@ -93,7 +93,7 @@ public class Virality
 
         try
         {
-            Harmony?.UnpatchAll(PluginInfo.PLUGIN_GUID);
+            Harmony?.UnpatchSelf();
             _isPatched = false;
             Logger?.LogDebug("Unpatched!");
         }

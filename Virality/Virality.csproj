@@ -57,19 +57,19 @@
     <!-- BepInEx Package References -->
     <ItemGroup>
         <PackageReference Include="BepInEx.PluginInfoProps" Version="1.*"/>
-        <PackageReference Include="UnityEngine.Modules" Version="2022.3.10" IncludeAssets="compile"/>
         <PackageReference Include="BepInEx.AssemblyPublicizer.MSBuild" Version="0.4.1" PrivateAssets="all" ExcludeAssets="runtime"/>
     </ItemGroup>
 
     <!-- Extra Package References -->
     <ItemGroup>
-        <PackageReference Include="Lib.Harmony" Version="2.3.3" />
         <PackageReference Include="MinVer" Version="4.*" PrivateAssets="all" Private="false"/>
     </ItemGroup>
 
     <!-- IDE Assemblies - Easier to Find Source Code -->
     <ItemGroup Condition="$(CI) != 'true'">
         <!-- Misc Assemblies -->
+        <PackageReference Include="HarmonyX" Version="2.13.0" />
+        <PackageReference Include="UnityEngine.Modules" Version="2022.3.10" IncludeAssets="compile"/>
 <!--        <Reference Include="Harmony" HintPath="$(CW_REFERENCES)\0Harmony.dll" Private="False" Publicize="true"/>-->
 <!--        <Reference Include="mscorlib" HintPath="$(CW_REFERENCES)\mscorlib.dll" Private="False" Publicize="true"/>-->
 <!--        <Reference Include="netstandard" HintPath="$(CW_REFERENCES)\netstandard.dll" Private="False" Publicize="true"/>-->
@@ -95,7 +95,7 @@
     </ItemGroup>
 
     <ItemGroup Condition="$(CI) == 'true'">
-        <PackageReference Include="MaxWasUnavailable.ContentWarning.Libs" Version="1.19.d" Publicize="true" Private="False" PrivateAssets="all"/>
+        <PackageReference Include="MaxWasUnavailable.ContentWarning.Libs" Version="1.19.1" Publicize="true" Private="False" PrivateAssets="all"/>
 <!--        <PackageReference Include="ContentWarning.GameLibs.Steam" Version="0.1.11-a-ngd.0" Publicize="true" Private="False" PrivateAssets="all"/>-->
     </ItemGroup>
 
