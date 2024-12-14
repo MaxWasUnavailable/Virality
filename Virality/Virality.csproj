@@ -22,6 +22,9 @@
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
         <LangVersion>latest</LangVersion>
         <Nullable>enable</Nullable>
+        
+        <!-- Disable Implicit Framework References -  Fixes Harmony & mscorlib issue with base game libs -->
+<!--        <DisableImplicitFrameworkReferences>true</DisableImplicitFrameworkReferences>-->
 
         <!-- NuGet Information -->
         <RestoreAdditionalProjectSources>
@@ -44,6 +47,7 @@
     <ItemGroup>
         <None Include="$(ProjectDir)../README.md" Pack="true" PackagePath="/"/>
         <None Include="$(ProjectDir)../CHANGELOG.md" Pack="true" PackagePath="/"/>
+        <None Include="$(ProjectDir)../preview.png" PackagePath="/"/>
         <None Include="$(ProjectDir)../assets/thunderstore.toml" PackagePath="/"/>
     </ItemGroup>
 
@@ -62,18 +66,28 @@
 
     <!-- IDE Assemblies - Easier to Find Source Code -->
     <ItemGroup Condition="$(CI) != 'true'">
+        <!-- Misc Assemblies -->
 <!--        <Reference Include="Harmony" HintPath="$(CW_REFERENCES)\0Harmony.dll" Private="False" Publicize="true"/>-->
 <!--        <Reference Include="mscorlib" HintPath="$(CW_REFERENCES)\mscorlib.dll" Private="False" Publicize="true"/>-->
+<!--        <Reference Include="netstandard" HintPath="$(CW_REFERENCES)\netstandard.dll" Private="False" Publicize="true"/>-->
+        
+        <!-- Game Assemblies -->
         <Reference Include="Assembly-CSharp" HintPath="$(CW_REFERENCES)\Assembly-CSharp.dll" Private="False" Publicize="true"/>
         <Reference Include="Assembly-CSharp-firstpass" HintPath="$(CW_REFERENCES)\Assembly-CSharp-firstpass.dll" Private="False" Publicize="true"/>
-        <Reference Include="UnityEngine.UI" HintPath="$(CW_REFERENCES)\UnityEngine.UI.dll" Private="False" Publicize="true"/>
         <Reference Include="Zorro.UI.Runtime" HintPath="$(CW_REFERENCES)\Zorro.UI.Runtime.dll" Private="False" Publicize="true"/>
         <Reference Include="Zorro.Core.Runtime" HintPath="$(CW_REFERENCES)\Zorro.Core.Runtime.dll" Private="False" Publicize="true"/>
         <Reference Include="Zoro.Settings.Runtime" HintPath="$(CW_REFERENCES)\Zorro.Settings.Runtime.dll" Private="False" Publicize="true"/>
         <Reference Include="ModalAssembly" HintPath="$(CW_REFERENCES)\ModalAssembly.dll" Private="False" Publicize="true"/>
-        <Reference Include="Steamworks" HintPath="$(CW_REFERENCES)\com.rlabrecque.steamworks.net.dll" Private="False" Publicize="true"/>
+
+        <!-- Photon Assemblies -->
         <Reference Include="PhotonUnityNetworking" HintPath="$(CW_REFERENCES)\PhotonUnityNetworking.dll" Private="False" Publicize="true"/>
         <Reference Include="PhotonRealtime" HintPath="$(CW_REFERENCES)\PhotonRealtime.dll" Private="False" Publicize="true"/>
+
+        <!-- Steam Assemblies -->
+        <Reference Include="Steamworks" HintPath="$(CW_REFERENCES)\com.rlabrecque.steamworks.net.dll" Private="False" Publicize="true"/>
+
+        <!-- Unity Assemblies -->
+        <Reference Include="UnityEngine.UI" HintPath="$(CW_REFERENCES)\UnityEngine.UI.dll" Private="False" Publicize="true"/>
         <Reference Include="Unity.Mathematics" HintPath="$(CW_REFERENCES)\Unity.Mathematics.dll" Private="False" Publicize="true"/>
     </ItemGroup>
 
