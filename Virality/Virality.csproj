@@ -95,7 +95,8 @@
     </ItemGroup>
 
     <ItemGroup Condition="$(CI) == 'true'">
-        <PackageReference Include="ContentWarning.GameLibs.Steam" Version="0.1.11-a-ngd.0" Publicize="true" Private="False" PrivateAssets="all"/>
+        <PackageReference Include="MaxWasUnavailable.ContentWarning.Libs" Version="1.19.d" Publicize="true" Private="False" PrivateAssets="all"/>
+<!--        <PackageReference Include="ContentWarning.GameLibs.Steam" Version="0.1.11-a-ngd.0" Publicize="true" Private="False" PrivateAssets="all"/>-->
     </ItemGroup>
 
     <ItemGroup Condition="'$(TargetFramework.TrimEnd(`0123456789`))' == 'net'">
