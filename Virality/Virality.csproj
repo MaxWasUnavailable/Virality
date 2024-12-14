@@ -58,14 +58,11 @@
 
     <!-- Extra Package References -->
     <ItemGroup>
-        <PackageReference Include="Lib.Harmony" Version="2.3.3" />
         <PackageReference Include="MinVer" Version="4.*" PrivateAssets="all" Private="false"/>
     </ItemGroup>
 
     <!-- IDE Assemblies - Easier to Find Source Code -->
     <ItemGroup Condition="$(CI) != 'true'">
-        <!--        <Reference Include="Harmony" HintPath="$(CW_REFERENCES)\0Harmony.dll" Private="False" Publicize="true"/>-->
-        <!--        <Reference Include="mscorlib" HintPath="$(CW_REFERENCES)\mscorlib.dll" Private="False" Publicize="true"/>-->
         <Reference Include="Assembly-CSharp" HintPath="$(CW_REFERENCES)\Assembly-CSharp.dll" Private="False" Publicize="true"/>
         <Reference Include="Assembly-CSharp-firstpass" HintPath="$(CW_REFERENCES)\Assembly-CSharp-firstpass.dll" Private="False" Publicize="true"/>
         <Reference Include="UnityEngine.UI" HintPath="$(CW_REFERENCES)\UnityEngine.UI.dll" Private="False" Publicize="true"/>
@@ -78,7 +75,7 @@
     </ItemGroup>
 
     <ItemGroup Condition="$(CI) == 'true'">
-        <PackageReference Include="ContentWarning.GameLibs.Steam" Version="0.1.11-a-ngd.0" Publicize="true" Private="False" PrivateAssets="all"/>
+        <PackageReference Include="MaxWasUnavailable.ContentWarning.Libs.BepInEx" Version="1.19.0" Publicize="true" Private="False" PrivateAssets="all"/>
     </ItemGroup>
 
     <ItemGroup Condition="'$(TargetFramework.TrimEnd(`0123456789`))' == 'net'">
