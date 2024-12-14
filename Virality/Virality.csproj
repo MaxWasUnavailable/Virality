@@ -99,7 +99,7 @@
         <Move SourceFiles="@(FilesToRename)" DestinationFiles="@(FilesToRename -&gt; Replace($(PlainVersion), $(MinVerVersion)))"/>
     </Target>
 
-    <Target Name="CopyOutputFileToGame" AfterTargets="Build">
+    <Target Name="CopyOutputFileToGame" AfterTargets="Build" Condition="$(CI) != 'true'">
         <Copy SourceFiles="$(OutputPath)\$(AssemblyName).dll" DestinationFolder="$(CW_REFERENCES)\..\..\Plugins\$(MSBuildProjectName)" />
         <Copy SourceFiles="../preview.png" DestinationFolder="$(CW_REFERENCES)\..\..\Plugins\$(MSBuildProjectName)" />
         <Copy SourceFiles="../CHANGELOG.md" DestinationFolder="$(CW_REFERENCES)\..\..\Plugins\$(MSBuildProjectName)" />
