@@ -7,7 +7,7 @@
         <PackageId>MaxWasUnavailable.Virality</PackageId>
         <Title>Virality</Title>
         <Description>Extends the max number of players that can play in a lobby, adds late joining, and proper Steam rich presence.</Description>
-        <Version>1.0.2</Version>
+        <Version>1.5.0</Version>
         <Authors>MaxWasUnavailable;Day</Authors>
         <PackageTags>content;warning;bepinex</PackageTags>
 
@@ -47,8 +47,11 @@
     <ItemGroup>
         <None Include="$(ProjectDir)../README.md" Pack="true" PackagePath="/"/>
         <None Include="$(ProjectDir)../CHANGELOG.md" Pack="true" PackagePath="/"/>
-        <None Include="$(ProjectDir)../preview.png" PackagePath="/"/>
         <None Include="$(ProjectDir)../assets/thunderstore.toml" PackagePath="/"/>
+        <None Include="..\preview.png">
+          <PackagePath>/</PackagePath>
+          <Link>preview.png</Link>
+        </None>
     </ItemGroup>
 
     <!-- BepInEx Package References -->
@@ -119,5 +122,13 @@
             <FilesToRename Include="$(ProjectDir)../dist/*-$(PlainVersion).zip"/>
         </ItemGroup>
         <Move SourceFiles="@(FilesToRename)" DestinationFiles="@(FilesToRename -&gt; Replace($(PlainVersion), $(MinVerVersion)))"/>
+    </Target>
+
+    <Target Name="CopyOutputFileToGame" AfterTargets="Build">
+        <Copy SourceFiles="$(OutputPath)\$(AssemblyName).dll" DestinationFolder="$(CW_REFERENCES)\..\..\Plugins\Virality" />
+        <Copy SourceFiles="../preview.png" DestinationFolder="$(CW_REFERENCES)\..\..\Plugins\Virality" />
+        <Copy SourceFiles="../CHANGELOG.md" DestinationFolder="$(CW_REFERENCES)\..\..\Plugins\Virality" />
+        <Copy SourceFiles="../LICENSE" DestinationFolder="$(CW_REFERENCES)\..\..\Plugins\Virality" />
+        <Copy SourceFiles="../README.md" DestinationFolder="$(CW_REFERENCES)\..\..\Plugins\Virality" />
     </Target>
 </Project>
