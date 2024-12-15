@@ -19,7 +19,7 @@ public static class PluginInfo
     /// <summary>
     ///    The version of the plugin.
     /// </summary>
-    public const string PluginVersion = "1.5.0";
+    public const string PluginVersion = "1.5.1";
 }
 
 /// <summary>

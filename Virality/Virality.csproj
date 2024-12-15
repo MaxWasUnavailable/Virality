@@ -7,7 +7,7 @@
         <PackageId>MaxWasUnavailable.Virality</PackageId>
         <Title>Virality</Title>
         <Description>Extends the max number of players that can play in a lobby, adds late joining, and proper Steam rich presence.</Description>
-        <Version>1.5.0</Version>
+        <Version>1.5.1</Version>
         <Authors>MaxWasUnavailable;Day</Authors>
         <PackageTags>content;warning;bepinex</PackageTags>
 
