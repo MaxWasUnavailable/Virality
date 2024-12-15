@@ -1,4 +1,4 @@
-﻿name: Publish
+﻿name: Publish BepInEx
 
 on:
   release:
@@ -36,12 +36,6 @@ jobs:
         with:
           name: thunderstore-build
           path: dist/*.zip
-
-      - name: Upload NuPkg Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: nupkg-build
-          path: Virality/bin/Release/*.nupkg
           
   upload-release-artifacts:
     needs: build

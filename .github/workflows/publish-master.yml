@@ -30,6 +30,12 @@ jobs:
       - name: Pack Solution
         run: |
           dotnet pack --configuration Release
+
+      - name: Upload Steam Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: steam-build
+          path: dist/*.zip
           
   upload-release-artifacts:
     needs: build
@@ -44,4 +50,4 @@ jobs:
       - name: Upload artifacts to Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh release upload ${{ github.event.release.tag_name }} steam-build/*.zip nupkg-build/*.nupkg
+        run: gh release upload ${{ github.event.release.tag_name }} steam-build/*.zip
