@@ -52,7 +52,6 @@
         <PackageReference Include="BepInEx.Analyzers" Version="1.*" PrivateAssets="all"/>
         <PackageReference Include="BepInEx.Core" Version="5.*"/>
         <PackageReference Include="BepInEx.PluginInfoProps" Version="1.*"/>
-        <PackageReference Include="UnityEngine.Modules" Version="2022.3.10" IncludeAssets="compile"/>
         <PackageReference Include="BepInEx.AssemblyPublicizer.MSBuild" Version="0.4.1" PrivateAssets="all" ExcludeAssets="runtime"/>
     </ItemGroup>
 
@@ -75,7 +74,7 @@
     </ItemGroup>
 
     <ItemGroup Condition="$(CI) == 'true'">
-        <PackageReference Include="MaxWasUnavailable.ContentWarning.Libs.BepInEx" Version="1.19.0" Publicize="true" Private="False" PrivateAssets="all"/>
+        <PackageReference Include="MaxWasUnavailable.ContentWarning.Libs.BepInEx" Version="1.19.5.1" Publicize="true" Private="False" PrivateAssets="all"/>
     </ItemGroup>
 
     <ItemGroup Condition="'$(TargetFramework.TrimEnd(`0123456789`))' == 'net'">
