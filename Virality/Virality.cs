@@ -36,7 +36,7 @@ public class Virality
         Logger = new Logger();
 
         // Unpatch all to avoid conflicts in case of hot reload
-        Instance?.UnpatchAll();
+        // Instance?.UnpatchAll();  -- disabled since CW now handles patching
 
         // Create new instance
         Instance = new Virality();
@@ -48,17 +48,19 @@ public class Virality
     public Virality()
     {
         // Patch using Harmony
-        PatchAll();
+        // PatchAll();  -- disabled since CW now handles patching
 
         // Override voice server app id
         if (EnableVoiceFix)
             OverrideVoiceServerAppId();
 
         // Report plugin loaded
-        if (_isPatched)
-            Logger?.LogInfo($"Plugin {PluginInfo.PluginGuid} is loaded!");
-        else
-            Logger?.LogError($"Plugin {PluginInfo.PluginGuid} failed to load correctly!");
+        // if (_isPatched)
+        //     Logger?.LogInfo($"Plugin {PluginInfo.PluginGuid} is loaded!");
+        // else
+        //     Logger?.LogError($"Plugin {PluginInfo.PluginGuid} failed to load correctly!");
+        
+        Logger?.LogInfo($"Plugin {PluginInfo.PluginGuid} is loaded!");
     }
 
     private Harmony? Harmony { get; set; }

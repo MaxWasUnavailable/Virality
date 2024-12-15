@@ -19,7 +19,7 @@ internal static class SteamLobbyHandlerPatches
     {
         SteamLobbyHelper.SetLobbyMaxToConfig();
     }
-    
+
     /// <summary>
     ///     Transpiler patch for the SteamLobbyHandler constructor.
     ///     Replaces the max players value with the one from the Virality config.
