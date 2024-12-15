@@ -35,7 +35,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: thunderstore-build
-          path: dist/*-bepinex.zip
+          path: dist/*.zip
           
   upload-release-artifacts:
     needs: build
@@ -50,7 +50,7 @@ jobs:
       - name: Upload artifacts to Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh release upload ${{ github.event.release.tag_name }} thunderstore-build/*-bepinex.zip
+        run: gh release upload ${{ github.event.release.tag_name }} thunderstore-build/*.zip
   
   deploy-thunderstore:
     if: ${{ github.event.release.prerelease == false }}
@@ -73,4 +73,4 @@ jobs:
         env:
           TCLI_AUTH_TOKEN: ${{ secrets.THUNDERSTORE_API_TOKEN }}
         run: |
-          dotnet tcli publish --config-path assets/thunderstore.toml --file dist/*-bepinex.zip
+          dotnet tcli publish --config-path assets/thunderstore.toml --file dist/*.zip
