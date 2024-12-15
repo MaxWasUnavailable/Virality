@@ -70,7 +70,7 @@
     </ItemGroup>
 
     <ItemGroup Condition="$(CI) == 'true'">
-        <PackageReference Include="MaxWasUnavailable.ContentWarning.Libs" Version="1.19.2" Publicize="true" Private="False" PrivateAssets="all"/>
+        <PackageReference Include="MaxWasUnavailable.ContentWarning.Libs" Version="1.19.5" Publicize="true" Private="False" PrivateAssets="all"/>
     </ItemGroup>
 
     <ItemGroup Condition="'$(TargetFramework.TrimEnd(`0123456789`))' == 'net'">
