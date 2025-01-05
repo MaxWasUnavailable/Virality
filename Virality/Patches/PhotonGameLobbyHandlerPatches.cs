@@ -1,4 +1,5 @@
 using HarmonyLib;
+using Photon.Pun;
 using Virality.Helpers;
 using Virality.State;
 
@@ -8,6 +9,30 @@ namespace Virality.Patches;
 [HarmonyPriority(Priority.First)]
 internal static class PhotonGameLobbyHandlerPatches
 {
+    /// <summary>
+    ///     Set
+    /// </summary>
+    [HarmonyPrefix]
+    [HarmonyPatch(nameof(PhotonGameLobbyHandler.Start))]
+    private static void OnSteamHostedPrefix()
+    {
+        // Override voice server app id
+        if (Virality.EnableVoiceFix!.Value)
+            OverrideVoiceServerAppId();
+    }
+
+    /// <summary>
+    ///     Overrides the voice server app id with the realtime server app id, in order to fix voice issues.
+    /// </summary>
+    private static void OverrideVoiceServerAppId()
+    {
+        PhotonNetwork.PhotonServerSettings.AppSettings.AppIdVoice =
+            PhotonNetwork.PhotonServerSettings.AppSettings.AppIdRealtime;
+
+        Virality.Logger?.LogDebug(
+            $"Voice server app id set to realtime server app id ({PhotonNetwork.PhotonServerSettings.AppSettings.AppIdVoice})");
+    }
+
     /// <summary>
     ///     Hide the lobby when the PhotonGameLobbyHandler is started and we're not on the surface.
     /// </summary>

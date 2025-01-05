@@ -5,7 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.5.2] - 14/12/2024 - (1.19.d)
+## [1.5.3] - 05/01/2025 - (1.19.d)
+
+### Added
+
+- Re-added voice fix, but moved it to a patch instead of performing it at launch.
+- Made BepInEx options configurable through vanilla options menu.
+
+## [1.5.2] - 05/01/2025 - (1.19.d)
 
 ### Removed
 
