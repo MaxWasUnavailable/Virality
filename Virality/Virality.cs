@@ -200,7 +200,7 @@ public class Virality
         }
     }
 
-    [ContentWarningSetting] // TODO: Turn into BoolSetting when available
+    [ContentWarningSetting]
     public class VoiceFixSetting : BoolSetting, IExposedSetting
     {
         public SettingCategory GetSettingCategory()
