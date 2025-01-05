@@ -65,6 +65,8 @@
         <Reference Include="Assembly-CSharp" HintPath="$(CW_REFERENCES)\Assembly-CSharp.dll" Private="False" Publicize="true"/>
         <Reference Include="Assembly-CSharp-firstpass" HintPath="$(CW_REFERENCES)\Assembly-CSharp-firstpass.dll" Private="False" Publicize="true"/>
         <Reference Include="UnityEngine.UI" HintPath="$(CW_REFERENCES)\UnityEngine.UI.dll" Private="False" Publicize="true"/>
+        <Reference Include="UnityEngine.CoreModule" HintPath="$(CW_REFERENCES)\UnityEngine.CoreModule.dll" Private="False" Publicize="true"/>
+        <Reference Include="UnityEngine" HintPath="$(CW_REFERENCES)\UnityEngine.dll" Private="False" Publicize="true"/>
         <Reference Include="Zorro.UI.Runtime" HintPath="$(CW_REFERENCES)\Zorro.UI.Runtime.dll" Private="False" Publicize="true"/>
         <Reference Include="Zorro.Core.Runtime" HintPath="$(CW_REFERENCES)\Zorro.Core.Runtime.dll" Private="False" Publicize="true"/>
         <Reference Include="ModalAssembly" HintPath="$(CW_REFERENCES)\ModalAssembly.dll" Private="False" Publicize="true"/>
