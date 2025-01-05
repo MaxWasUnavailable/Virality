@@ -14,6 +14,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.5.2] - 05/01/2024 - (1.19.d)
 
 - BepInEx specific changes. See branch `release/bepinex` for more details.
+  - Moved voice fix to a patch since it was breaking lobby hosting for some reason
+  - Made BepInEx settings compatible with vanilla game settings system for QoL
 
 ## [1.5.0] - 14/12/2024 - (1.19.d)
 
