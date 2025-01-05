@@ -67,7 +67,9 @@
         <Reference Include="UnityEngine.UI" HintPath="$(CW_REFERENCES)\UnityEngine.UI.dll" Private="False" Publicize="true"/>
         <Reference Include="UnityEngine.CoreModule" HintPath="$(CW_REFERENCES)\UnityEngine.CoreModule.dll" Private="False" Publicize="true"/>
         <Reference Include="UnityEngine" HintPath="$(CW_REFERENCES)\UnityEngine.dll" Private="False" Publicize="true"/>
+        <Reference Include="Unity.Mathematics" HintPath="$(CW_REFERENCES)\Unity.Mathematics.dll" Private="False" Publicize="true"/>
         <Reference Include="Zorro.UI.Runtime" HintPath="$(CW_REFERENCES)\Zorro.UI.Runtime.dll" Private="False" Publicize="true"/>
+        <Reference Include="Zorro.Settings.Runtime" HintPath="$(CW_REFERENCES)\Zorro.Settings.Runtime.dll" Private="False" Publicize="true"/>
         <Reference Include="Zorro.Core.Runtime" HintPath="$(CW_REFERENCES)\Zorro.Core.Runtime.dll" Private="False" Publicize="true"/>
         <Reference Include="ModalAssembly" HintPath="$(CW_REFERENCES)\ModalAssembly.dll" Private="False" Publicize="true"/>
         <Reference Include="Steamworks" HintPath="$(CW_REFERENCES)\com.rlabrecque.steamworks.net.dll" Private="False" Publicize="true"/>

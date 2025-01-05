@@ -3,7 +3,8 @@ using BepInEx;
 using BepInEx.Configuration;
 using BepInEx.Logging;
 using HarmonyLib;
-using Photon.Pun;
+using Unity.Mathematics;
+using Zorro.Settings;
 
 namespace Virality;
 
@@ -77,4 +78,99 @@ public class Virality : BaseUnityPlugin
             Logger?.LogError($"Failed to patch: {e}");
         }
     }
+
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+
+    [ContentWarningSetting]
+    public class MaxPlayersSetting : IntSetting, IExposedSetting
+    {
+        public SettingCategory GetSettingCategory()
+        {
+            return SettingCategory.Mods;
+        }
+
+        public string GetDisplayName()
+        {
+            return "Max Players";
+        }
+
+        public override void ApplyValue()
+        {
+            MaxPlayers!.Value = ValidateValue(Value);
+        }
+
+        public override int GetDefaultValue()
+        {
+            return MaxPlayers?.Value ?? 12;
+        }
+
+        private static int ValidateValue(int value)
+        {
+            return math.clamp(value, 1, 100);
+        }
+
+        public string GetDescription()
+        {
+            return "The maximum number of players allowed in your lobby.";
+        }
+    }
+
+    [ContentWarningSetting]
+    public class LateJoinSetting : BoolSetting, IExposedSetting
+    {
+        public SettingCategory GetSettingCategory()
+        {
+            return SettingCategory.Mods;
+        }
+
+        public string GetDisplayName()
+        {
+            return "Allow Late Join";
+        }
+
+        public override void ApplyValue()
+        {
+            AllowLateJoin!.Value = Value;
+        }
+
+        public override bool GetDefaultValue()
+        {
+            return AllowLateJoin?.Value ?? true;
+        }
+
+        public string GetDescription()
+        {
+            return "Whether or not to allow players to join your lobby after the game has started.";
+        }
+    }
+
+    [ContentWarningSetting]
+    public class VoiceFixSetting : BoolSetting, IExposedSetting
+    {
+        public SettingCategory GetSettingCategory()
+        {
+            return SettingCategory.Mods;
+        }
+
+        public string GetDisplayName()
+        {
+            return "Enable Voice Fix";
+        }
+
+        public override void ApplyValue()
+        {
+            EnableVoiceFix!.Value = Value;
+        }
+
+        public override bool GetDefaultValue()
+        {
+            return EnableVoiceFix?.Value ?? true;
+        }
+
+        public string GetDescription()
+        {
+            return "Whether or not to enable the voice fix.";
+        }
+    }
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
 }
