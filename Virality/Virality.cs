@@ -35,9 +35,6 @@ public class Virality
         // Init logger
         Logger = new Logger();
 
-        // Unpatch all to avoid conflicts in case of hot reload
-        // Instance?.UnpatchAll();  -- disabled since CW now handles patching
-
         // Create new instance
         Instance = new Virality();
     }
@@ -47,19 +44,6 @@ public class Virality
     /// </summary>
     public Virality()
     {
-        // Patch using Harmony
-        // PatchAll();  -- disabled since CW now handles patching
-
-        // Override voice server app id
-        if (EnableVoiceFix)
-            OverrideVoiceServerAppId();
-
-        // Report plugin loaded
-        // if (_isPatched)
-        //     Logger?.LogInfo($"Plugin {PluginInfo.PluginGuid} is loaded!");
-        // else
-        //     Logger?.LogError($"Plugin {PluginInfo.PluginGuid} failed to load correctly!");
-        
         Logger?.LogInfo($"Plugin {PluginInfo.PluginGuid} is loaded!");
     }
 
@@ -121,18 +105,6 @@ public class Virality
         {
             Logger?.LogError($"Failed to unpatch: {e}");
         }
-    }
-
-    /// <summary>
-    ///     Overrides the voice server app id with the realtime server app id, in order to fix voice issues.
-    /// </summary>
-    private static void OverrideVoiceServerAppId()
-    {
-        PhotonNetwork.PhotonServerSettings.AppSettings.AppIdVoice =
-            PhotonNetwork.PhotonServerSettings.AppSettings.AppIdRealtime;
-
-        Logger?.LogDebug(
-            $"Voice server app id set to realtime server app id ({PhotonNetwork.PhotonServerSettings.AppSettings.AppIdVoice})");
     }
 
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
