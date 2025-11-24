@@ -10,12 +10,12 @@ namespace Virality.Patches;
 internal static class MainMenuHandlerPatches
 {
     /// <summary>
-    ///     Transpiler patch for the OnSteamHosted method.
+    ///     Transpiler patch for the OnLobbyHosted method.
     ///     Replaces the max players value with the one from the Virality config.
     /// </summary>
     [HarmonyTranspiler]
-    [HarmonyPatch(nameof(MainMenuHandler.OnSteamHosted))]
-    private static IEnumerable<CodeInstruction> OnSteamHostedTranspiler(IEnumerable<CodeInstruction> instructions)
+    [HarmonyPatch(nameof(MainMenuHandler.OnLobbyHosted))]
+    private static IEnumerable<CodeInstruction> OnLobbyHostedTranspiler(IEnumerable<CodeInstruction> instructions)
     {
         return new CodeMatcher(instructions)
             .SearchForward(instruction => instruction.opcode == OpCodes.Ldc_I4_4)
